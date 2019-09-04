@@ -2,8 +2,10 @@
 const private_key = "f369b58d6e7141439bc7b563f4c90bf1bf6a5e82d5f249088c7436606bba0460";
 const charUrl = "https://xivapi.com/character/search?";
 const profileUrl = "https://xivapi.com/character/";
-            //   <span>15492551</span> ID NUMBER
 
+
+//Watches for search button to be clicked on
+//Initializes get search results
 function formWatch () {
     $('#js-form').submit(event => {
         event.preventDefault();
@@ -21,6 +23,7 @@ function formWatch () {
     })
 }
 
+//Converts params into a string
 function generateQueryString(params) {
 
     const queryItems = Object.keys(params)
@@ -29,7 +32,8 @@ function generateQueryString(params) {
 
 }
 
-
+//Fetches the XIVAPI to gather search results
+//Based on Character + Server Name
 function getSearchResults(playerName, serverName) {
     const params = {
         private_key : private_key,
@@ -54,20 +58,36 @@ function getSearchResults(playerName, serverName) {
     })
 }
 
+//Displays the initial search results
+//Found from the fetch
+//Displays them their own div box
 function displaySearchResults(data) {
 
     $('#js-results').empty();
 
     for(let idx = 0; idx < data.Results.length; idx++){
         $('#js-results').append(`
+        <a href="https://xivapi.com/character/${data.Results[idx].ID}">
         <div class="miniProfile">
         <img class="avatar" src="${data.Results[idx].Avatar}" alt="Players Avatar Picture">
         <div class="profileInfo">
         <p>${data.Results[idx].Name}</p>
         <p>${data.Results[idx].Server}</p>
         </div>
-        </div>`
+        </div>
+        </a>`
         )};
+        profileWatch();
+}
+
+//Watches for the click on the mini Profile
+function profileWatch() {
+
+    $('.miniProfile').on('click', function (event) {
+        event.preventDefault();
+        console.log("click");
+    })
+
 }
 
 
