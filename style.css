@@ -1,0 +1,98 @@
+* {
+    box-sizing: border-box;
+}
+
+body { 
+    margin: 0;
+    padding: 0;
+}
+
+.navLogo {
+    padding: 18px 0;
+}
+
+.characterSearch {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+form {
+    width: 500px;
+    padding-left: 30px;
+}
+
+#userSearch, .serverLabel {
+    margin-top: 5px;
+}
+
+#userSearch {
+    width: 100%;
+    font-size: 20px;
+}
+
+.serverLabel {
+    font-size: 20px;
+}
+
+#serverList {
+    width: 100%;
+    font-size: 20px;
+}
+
+#serverList  option {
+    font-size: 16px;
+}
+
+#submitBtn {
+    width: 100%;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.nav {
+    margin-top: 200px;
+}
+
+.navTop {
+    margin-top: 0;
+}
+
+.results {
+    margin-top: 50px;
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.miniProfile {
+    display: inline-block;
+    width: 250px;
+    height: 96px;
+    background-color: lightgray;
+    position: relative;
+}
+
+.avatar { 
+    clear: both;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.profileInfo {
+    position: absolute;
+    right: 15%;
+}
+
+
+@media screen and (max-width: 600px) {
+
+
+    form {
+        width: 300px;
+        padding-left: 10px;
+    }
+}
