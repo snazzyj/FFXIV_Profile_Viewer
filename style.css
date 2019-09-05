@@ -7,6 +7,7 @@ body {
     padding: 0;
 }
 
+/* Nav Section */
 .navLogo {
     padding: 18px 0;
 }
@@ -59,6 +60,7 @@ form {
     margin-top: 0;
 }
 
+/*Character Results Section */
 .results {
     margin-top: 50px;
     width: 1000px;
@@ -67,26 +69,38 @@ form {
 
 }
 
-.miniProfile {
-    display: inline-block;
-    width: 250px;
+ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+li {
+    width: 400px;
+    background-color: gray;
     height: 96px;
-    background-color: lightgray;
-    position: relative;
+    margin: 0 5px;
+    list-style-type: none;
 }
 
-.avatar { 
-    clear: both;
-    position: absolute;
-    top: 0;
-    left: 0;
+a {
+    display: inline-block;
+    width: 400px;
+    height: 96px;
 }
 
-.profileInfo {
-    position: absolute;
-    right: 15%;
+/* Character Data Section */
+
+.characterBox {
+    width: 1000px;
+    background-color: lightblue;
+    margin-left: auto;
+    margin-right: auto;
 }
 
+.charPortrait {
+    height: 400px;
+    width: 250px;
+}
 
 @media screen and (max-width: 600px) {
 

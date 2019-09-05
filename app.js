@@ -1,5 +1,4 @@
 
-const private_key = "f369b58d6e7141439bc7b563f4c90bf1bf6a5e82d5f249088c7436606bba0460";
 const charUrl = "https://xivapi.com/character/search?";
 const profileUrl = "https://xivapi.com/character/";
 
@@ -11,15 +10,12 @@ function formWatch () {
         event.preventDefault();
         $('nav').removeClass('nav');
         $('nav').addClass('navTop');
-
+        $('#js-characterData').empty();
         const playerName = $('#userSearch').val();
         const serverName = document.getElementById('serverList').value;
-
+ 
         getSearchResults(playerName, serverName);
-        console.log(playerName);
-        console.log(serverName);
-        
-        console.log("click")
+
     })
 }
 
@@ -36,7 +32,6 @@ function generateQueryString(params) {
 //Based on Character + Server Name
 function getSearchResults(playerName, serverName) {
     const params = {
-        private_key : private_key,
         name : playerName,
         server : serverName
     }
@@ -63,33 +58,72 @@ function getSearchResults(playerName, serverName) {
 //Displays them their own div box
 function displaySearchResults(data) {
 
-    $('#js-results').empty();
+    $('.results').empty();
 
     for(let idx = 0; idx < data.Results.length; idx++){
-        $('#js-results').append(`
-        <a href="https://xivapi.com/character/${data.Results[idx].ID}">
-        <div class="miniProfile">
+        $('.results').append(`
+        <li>
+        <a class="characterUrl" href="https://xivapi.com/character/${data.Results[idx].ID}">
         <img class="avatar" src="${data.Results[idx].Avatar}" alt="Players Avatar Picture">
-        <div class="profileInfo">
-        <p>${data.Results[idx].Name}</p>
-        <p>${data.Results[idx].Server}</p>
-        </div>
-        </div>
-        </a>`
-        )};
+        
+        <span>${data.Results[idx].Name}</span>
+        <span>${data.Results[idx].Server}</span>
+       
+        </a>
+        </li>
+        
+       ` )};
         profileWatch();
 }
 
 //Watches for the click on the mini Profile
 function profileWatch() {
 
-    $('.miniProfile').on('click', function (event) {
+    $('.characterUrl').on('click', function (event) {
         event.preventDefault();
+
+
+
+        let playerDataUrl = $('.characterUrl').attr('href');
+        console.log(playerDataUrl);
+
+        fetch(playerDataUrl)
+        .then(response => {
+            if(response.ok){
+                return response.json();
+            } else {
+                throw new Error(response.statusText);
+            }
+        })
+        .then(results => displayCharacterData(results))
+        .catch(error => {
+            alert(`Something Went Wrong: ${error.message}`);
+        });
         console.log("click");
     })
 
 }
 
+function displayCharacterData(results) {
+    console.log("DisplayChararcterData Ran");
+    $('.results').empty();
+    console.log(typeof(results));
+    
+
+    let res = results.Character.ClassJobs[0].Level;
+    console.log(res);
+
+    $('#js-characterData').append(`
+        <div class="characterBox">
+            <p>${results.Character.Name}</p>
+            <p>${results.Character.Server}</p>
+            <p>${res}</p>
+            <img class="charPortrait" src="${results.Character.Portrait}">
+            
+            
+    `)
+
+}
 
 
 $(formWatch);
