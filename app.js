@@ -84,7 +84,7 @@ function profileWatch() {
 
 
 
-        let playerDataUrl = $('.characterUrl').attr('href');
+        let playerDataUrl = $(this).attr('href');
         console.log(playerDataUrl);
 
         fetch(playerDataUrl)
@@ -114,14 +114,13 @@ function displayCharacterData(results) {
     console.log(res);
 
     $('#js-characterData').append(`
-        <div class="characterBox">
+        <div class="leftSideContainer">
             <p>${results.Character.Name}</p>
             <p>${results.Character.Server}</p>
-            <p>${res}</p>
             <img class="charPortrait" src="${results.Character.Portrait}">
+        </div>
             
-            
-    `)
+    `);
 
 }
 

@@ -54,6 +54,7 @@ form {
 
 .nav {
     margin-top: 200px;
+    display: none;
 }
 
 .navTop {
@@ -91,16 +92,118 @@ a {
 /* Character Data Section */
 
 .characterBox {
-    width: 1000px;
+    width: 1300px;
     background-color: lightblue;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 50px;
+    display: flex;
+}
+
+.leftSideContainer {
+    padding: 5px 0px 5px 10px;
+    border-right: 1px solid white;
+    width: 340px;
+}
+.nameAndServer {
+    text-align: center;
+
+}
+
+
+.characterPortrait {
+    width: 320px;
+    padding-bottom: 5px;
+
 }
 
 .charPortrait {
-    height: 400px;
-    width: 250px;
+    height: auto;
+    width: 320px;
+
 }
+
+.jobIcon {
+    width: 23px;
+    height: 23px;
+}
+
+.placeholder {
+    opacity: 0;
+    width: 23px;
+    height: 23px;
+}
+
+.jobOverview {
+    width: 300px;
+
+}
+
+.jobSpecific {
+    display: inline-block;
+}
+.jobLevel {
+    text-align: center;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* Gear/Character Stats section */
+
+.stats {
+    width: 700px;
+    background-color: aliceblue;
+
+}
+
+.mainAttribute {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.title {
+    width: 100%;
+    margin: 0;
+    border-bottom: 1px solid gray;
+    margin-top: 70px;
+
+}
+
+.attributeNameAndNumber {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.leftSide, .rightSide {
+    width: 50%;
+}
+
+.leftSide {
+    padding-right: 15px;
+}
+
+.rightSide {
+    padding-left: 15px;
+}
+
+.secondaryProp {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
 
 @media screen and (max-width: 600px) {
 
