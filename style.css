@@ -54,7 +54,7 @@ form {
 
 .nav {
     margin-top: 200px;
-    display: none;
+
 }
 
 .navTop {
@@ -98,6 +98,7 @@ a {
     margin-right: auto;
     margin-bottom: 50px;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .leftSideContainer {
@@ -203,6 +204,46 @@ a {
     padding-right: 15px;
 }
 
+.gearList {
+    width: 50%;
+    background-color:lightgreen;
+    display: flex;
+
+}
+
+.glamList {
+    width: 50%;
+    background-color:lightseagreen;
+    height: 200px;
+}
+
+.gearContent {
+    display: inline-block;
+    width: 100%;
+    padding-left: 20px;
+}
+.gearIcon {
+    width: 40px;
+    height: 40px;
+    float: left;
+}
+
+.gearPiece { 
+    height: 40px;
+}
+
+.gearName {
+    padding: 10px 50px;
+}
+
+.materia {
+    padding-left: 40px;
+}
+
+.materiaIcon {
+    width: 25px;
+    height: 25px;
+}
 
 
 @media screen and (max-width: 600px) {

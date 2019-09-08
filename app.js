@@ -5,15 +5,15 @@ const profileUrl = "https://xivapi.com/character/";
 
 //Watches for search button to be clicked on
 //Initializes get search results
-function formWatch () {
+function formWatch() {
     $('#js-form').submit(event => {
         event.preventDefault();
         $('nav').removeClass('nav');
         $('nav').addClass('navTop');
-        $('#js-characterData').empty();
+        $('#js-characterData').hide();
         const playerName = $('#userSearch').val();
         const serverName = document.getElementById('serverList').value;
- 
+
         getSearchResults(playerName, serverName);
 
     })
@@ -23,7 +23,7 @@ function formWatch () {
 function generateQueryString(params) {
 
     const queryItems = Object.keys(params)
-                       .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`);
+        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`);
     return queryItems.join('&');
 
 }
@@ -32,25 +32,25 @@ function generateQueryString(params) {
 //Based on Character + Server Name
 function getSearchResults(playerName, serverName) {
     const params = {
-        name : playerName,
-        server : serverName
+        name: playerName,
+        server: serverName
     }
     const queryString = generateQueryString(params);
     const searchUrl = charUrl + queryString;
     console.log(searchUrl);
 
     fetch(searchUrl)
-    .then(response => {
-        if(response.ok) {
-            return response.json();
-        } else {
-            throw new Error (response.statusText);
-        }
-    })
-    .then(data => (displaySearchResults(data)))
-    .catch(error => {
-        alert(`Something went wrong: ${error.message}`);
-    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error(response.statusText);
+            }
+        })
+        .then(data => (displaySearchResults(data)))
+        .catch(error => {
+            alert(`Something went wrong: ${error.message}`);
+        })
 }
 
 //Displays the initial search results
@@ -60,7 +60,7 @@ function displaySearchResults(data) {
 
     $('.results').empty();
 
-    for(let idx = 0; idx < data.Results.length; idx++){
+    for (let idx = 0; idx < data.Results.length; idx++) {
         $('.results').append(`
         <li>
         <a class="characterUrl" href="https://xivapi.com/character/${data.Results[idx].ID}">
@@ -72,8 +72,9 @@ function displaySearchResults(data) {
         </a>
         </li>
         
-       ` )};
-        profileWatch();
+       ` )
+    };
+    profileWatch();
 }
 
 //Watches for the click on the mini Profile
@@ -84,45 +85,136 @@ function profileWatch() {
 
 
 
-        let playerDataUrl = $(this).attr('href');
+        let playerData = $(this).attr('href');
+        let playerDataUrl = playerData + "?extended=1";
         console.log(playerDataUrl);
 
         fetch(playerDataUrl)
-        .then(response => {
-            if(response.ok){
-                return response.json();
-            } else {
-                throw new Error(response.statusText);
-            }
-        })
-        .then(results => displayCharacterData(results))
-        .catch(error => {
-            alert(`Something Went Wrong: ${error.message}`);
-        });
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error(response.statusText);
+                }
+            })
+            .then(results => displayCharacterData(results))
+            .catch(error => {
+                alert(`Something Went Wrong: ${error.message}`);
+            });
         console.log("click");
     })
 
 }
 
+
+
 function displayCharacterData(results) {
-    console.log("DisplayChararcterData Ran");
-    $('.results').empty();
-    console.log(typeof(results));
     
+    $('#js-characterData').show();
+    $('.results').empty();
+    let toon = results.Character;
 
-    let res = results.Character.ClassJobs[0].Level;
-    console.log(res);
+    console.log(toon.Name);
 
-    $('#js-characterData').append(`
-        <div class="leftSideContainer">
-            <p>${results.Character.Name}</p>
-            <p>${results.Character.Server}</p>
-            <img class="charPortrait" src="${results.Character.Portrait}">
-        </div>
-            
-    `);
+    $('.nameAndServer').html(`
+        <p>${toon.Name}</p>
+        <p>${toon.Server} (${toon.DC}) </p>
+    `)
+    $('.characterPortrait').html(`
+        <img class="charPortrait" src=${toon.Portrait}>
+    `)
+
+
+    
+    getStats(toon);
+    getJobLevels(toon);
+}
+
+
+function getStats(toon) {
+
+    let stats = Object.keys(toon.GearSet.Attributes).map(
+        function (attr) {
+            let value = toon.GearSet.Attributes[attr];
+            return value;
+        }
+    )
+
+    console.log(stats);
+
+    $('.str').html(`${stats[0].Value}`);
+    $('.dex').html(`${stats[1].Value}`);
+    $('.vit').html(`${stats[2].Value}`);
+    $('.int').html(`${stats[3].Value}`);
+    $('.mnd').html(`${stats[4].Value}`);
+
+    $('.ch').html(`${stats[5].Value}`);
+    $('.det').html(`${stats[6].Value}`);
+    $('.dh').html(`${stats[7].Value}`);
+
+    $('.def').html(`${stats[8].Value}`);   
+    $('.mdef').html(`${stats[9].Value}`);
+    
+    $('.atk').html(`${stats[10].Value}`);
+    $('.sks').html(`${stats[11].Value}`);
+
+    $('.atkMagic').html(`${stats[12].Value}`);
+    $('.healMagic').html(`${stats[13].Value}`);
+    $('.sps').html(`${stats[14].Value}`);
+    
+    $('.ten').html(`${stats[15].Value}`);
+    $('.pie').html(`${stats[16].Value}`);    
 
 }
+
+
+function getJobLevels(toon) {
+
+    let level = toon.ClassJobs.map(el => el.Level);
+    console.log(level);
+
+    $('.pld').html(`${level[0]}`);
+    $('.war').html(`${level[1]}`);
+    $('.drk').html(`${level[2]}`);
+    $('.gnb').html(`${level[3]}`);
+
+    $('.whm').html(`${level[8]}`);
+    $('.sch').html(`${level[9]}`);
+    $('.ast').html(`${level[10]}`);
+
+    $('.mnk').html(`${level[4]}`);    
+    $('.drg').html(`${level[5]}`);    
+    $('.nin').html(`${level[6]}`);    
+    $('.sam').html(`${level[7]}`);    
+    
+    $('.brd').html(`${level[11]}`);
+    $('.mch').html(`${level[12]}`);
+    $('.dnc').html(`${level[13]}`);
+
+    $('.blm').html(`${level[14]}`);
+    $('.smn').html(`${level[15]}`);
+    $('.rdm').html(`${level[16]}`);
+    $('.blu').html(`${level[17]}`);
+
+    $('.crp').html(`${level[18]}`);
+    $('.bsm').html(`${level[19]}`);
+    $('.arm').html(`${level[20]}`);
+    $('.gsm').html(`${level[21]}`);
+    $('.ltw').html(`${level[22]}`);
+    $('.wvr').html(`${level[23]}`);
+    $('.alc').html(`${level[24]}`);
+    $('.cul').html(`${level[25]}`);
+
+    $('.min').html(`${level[26]}`);
+    $('.btn').html(`${level[27]}`);
+    $('.fsh').html(`${level[28]}`);
+
+
+}
+
+
+
+
 
 
 $(formWatch);
