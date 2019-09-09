@@ -128,6 +128,7 @@ function displayCharacterData(results) {
     
     getStats(toon);
     getJobLevels(toon);
+    getGear(toon);
 }
 
 
@@ -212,7 +213,18 @@ function getJobLevels(toon) {
 
 }
 
+function getGear (toon) {
 
+    let gear = toon.GearSet.Gear;
+    console.log(gear);
+
+    $('.head').html(`<img class="gearIcon headIcon" src="https://xivapi.com/${gear.Head.Item.Icon}">
+                      <p class="gearName head">${gear.Head.Item.Name}</p>
+    `);
+    
+
+
+}
 
 
 

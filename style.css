@@ -92,19 +92,21 @@ a {
 /* Character Data Section */
 
 .characterBox {
-    width: 1300px;
+
     background-color: lightblue;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 50px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .leftSideContainer {
-    padding: 5px 0px 5px 10px;
-    border-right: 1px solid white;
-    width: 340px;
+    padding: 5px 10px 5px 10px;
+
+    background-color: aliceblue;
+
 }
 .nameAndServer {
     text-align: center;
@@ -205,23 +207,19 @@ a {
 }
 
 .gearList {
-    width: 50%;
+
     background-color:lightgreen;
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
 
 }
 
-.glamList {
-    width: 50%;
-    background-color:lightseagreen;
-    height: 200px;
-}
 
-.gearContent {
-    display: inline-block;
-    width: 100%;
-    padding-left: 20px;
-}
 .gearIcon {
     width: 40px;
     height: 40px;
@@ -237,7 +235,10 @@ a {
 }
 
 .materia {
-    padding-left: 40px;
+    padding: 10px 0 10px 40px;
+    display: flex;
+    flex-direction: column;
+
 }
 
 .materiaIcon {
@@ -245,6 +246,13 @@ a {
     height: 25px;
 }
 
+.leftSideGear, .rightSideGear {
+    width: 35%;
+}
+
+.weap, .shield {  
+    width: 35%;
+}
 
 @media screen and (max-width: 600px) {
 
