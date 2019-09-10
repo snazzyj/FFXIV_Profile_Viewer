@@ -70,7 +70,7 @@ form {
 
 }
 
-ul {
+.results {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -100,6 +100,7 @@ a {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: 75%;
 }
 
 .leftSideContainer {
@@ -206,52 +207,25 @@ a {
     padding-right: 15px;
 }
 
-.gearList {
+.gearColumns, .gear {
 
     background-color:lightgreen;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+
     padding-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
+  
 
 }
 
-
-.gearIcon {
-    width: 40px;
-    height: 40px;
-    float: left;
-}
-
-.gearPiece { 
-    height: 40px;
-}
-
-.gearName {
-    padding: 10px 50px;
-}
-
-.materia {
-    padding: 10px 0 10px 40px;
+.bodyParts {
     display: flex;
     flex-direction: column;
-
 }
 
-.materiaIcon {
-    width: 25px;
-    height: 25px;
-}
-
-.leftSideGear, .rightSideGear {
-    width: 35%;
-}
-
-.weap, .shield {  
-    width: 35%;
+.bodyPart {
+    height: auto;
 }
 
 @media screen and (max-width: 600px) {

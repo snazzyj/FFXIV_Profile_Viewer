@@ -126,13 +126,13 @@ function displayCharacterData(results) {
 
 
     
-    getStats(toon);
-    getJobLevels(toon);
-    getGear(toon);
+    displayStats(toon);
+    displayJobLevels(toon);
+    displayGear(toon);
 }
 
 
-function getStats(toon) {
+function displayStats(toon) {
 
     let stats = Object.keys(toon.GearSet.Attributes).map(
         function (attr) {
@@ -141,7 +141,6 @@ function getStats(toon) {
         }
     )
 
-    console.log(stats);
 
     $('.str').html(`${stats[0].Value}`);
     $('.dex').html(`${stats[1].Value}`);
@@ -169,10 +168,9 @@ function getStats(toon) {
 }
 
 
-function getJobLevels(toon) {
+function displayJobLevels(toon) {
 
     let level = toon.ClassJobs.map(el => el.Level);
-    console.log(level);
 
     $('.pld').html(`${level[0]}`);
     $('.war').html(`${level[1]}`);
@@ -213,20 +211,87 @@ function getJobLevels(toon) {
 
 }
 
-function getGear (toon) {
+//rename functions
+//gear collection of names
+//if statements
+//if(gear.head)
 
-    let gear = toon.GearSet.Gear;
-    console.log(gear);
+//leftside arr
+//rightside arr
 
-    $('.head').html(`<img class="gearIcon headIcon" src="https://xivapi.com/${gear.Head.Item.Icon}">
-                      <p class="gearName head">${gear.Head.Item.Name}</p>
-    `);
-    
+//Displays Gear currently equipped
 
+function displayGear (toon) {
+
+  let leftParts = ['MainHand', 'Head', 'Body', 'Hands', 'Waist', 'Legs', 'Feet'];
+  let rightParts = ['Earrings', 'Necklace', 'Bracelets', 'Ring1', 'Ring2'];
+
+  let gear = toon.GearSet.Gear;
+  console.log(gear);
+
+  $('.gear').html(getGearColumns(gear, leftParts, rightParts));
 
 }
 
+//Checks and returns if materia is present on any of the gear pieces
+function getMateria (part){
 
+    if(part && part.Materia) {
+        return part.Materia.map(
+            materia => `<div class="Materia">
+            <img src="https://xivapi.com${materia.Icon}">
+            ${materia.Name}
+            </div>
+            `
+        );
+    }
+
+    return ``;
+
+}
+
+//Gets and returns all currently equipped gear
+function getGearItem (gear, partName){
+
+    let part = gear[partName];
+    let materia = part.Materia ? getMateria(part) : '' ;
+    
+    
+        return `
+        <li class="bodyPart ${partName}">
+        <h4>${partName}</h4>
+        <img src="https://xivapi.com${part.Item.Icon}">
+        ${part.Item.Name}
+        ${materia}
+    `;
+     
+   
+
+}
+
+//breaks up the gear into 2 columns
+function getGearColumns(gear, column1, column2) {
+
+
+    let leftColumn = column1.map(
+        partName => getGearItem(gear, partName)
+    ).join('');
+    
+
+    let rightColumn = column2.map(
+        partName => getGearItem(gear, partName)
+    ).join('');
+    
+
+
+    return `<div class="gearColumns">
+        <ul class="bodyParts left">${leftColumn}</ul>
+        <ul class="bodyParts right">${rightColumn}</ul>
+    `
+
+
+
+}
 
 
 $(formWatch);
