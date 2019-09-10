@@ -62,25 +62,30 @@ form {
 }
 
 /*Character Results Section */
-.results {
-    margin-top: 50px;
-    width: 1000px;
+#wrapper {
+    width: 75%;
     margin-left: auto;
     margin-right: auto;
-
 }
-
 .results {
+    margin-top: 50px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
 }
-li {
+
+.searchResults {
     width: 400px;
     background-color: gray;
     height: 96px;
     margin: 0 5px;
     list-style-type: none;
+    display: inline-block;
+    margin-top: 10px;
 }
 
 a {
@@ -209,7 +214,7 @@ a {
 
 .gearColumns, .gear {
 
-    background-color:lightgreen;
+    background-color: lightskyblue;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

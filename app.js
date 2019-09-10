@@ -62,7 +62,7 @@ function displaySearchResults(data) {
 
     for (let idx = 0; idx < data.Results.length; idx++) {
         $('.results').append(`
-        <li>
+        <li class="searchResults">
         <a class="characterUrl" href="https://xivapi.com/character/${data.Results[idx].ID}">
         <img class="avatar" src="${data.Results[idx].Avatar}" alt="Players Avatar Picture">
         
@@ -101,7 +101,7 @@ function profileWatch() {
             .catch(error => {
                 alert(`Something Went Wrong: ${error.message}`);
             });
-        console.log("click");
+
     })
 
 }
@@ -224,9 +224,10 @@ function displayJobLevels(toon) {
 function displayGear (toon) {
 
   let leftParts = ['MainHand', 'Head', 'Body', 'Hands', 'Waist', 'Legs', 'Feet'];
-  let rightParts = ['Earrings', 'Necklace', 'Bracelets', 'Ring1', 'Ring2'];
+  let rightParts = ['OffHand', 'Earrings', 'Necklace', 'Bracelets', 'Ring1', 'Ring2'];
 
   let gear = toon.GearSet.Gear;
+  
   console.log(gear);
 
   $('.gear').html(getGearColumns(gear, leftParts, rightParts));
@@ -236,7 +237,17 @@ function displayGear (toon) {
 //Checks and returns if materia is present on any of the gear pieces
 function getMateria (part){
 
-    if(part && part.Materia) {
+    // if(part && part.Materia) {
+    //     return part.Materia.map(
+    //         materia => `<div class="Materia">
+    //         <img src="https://xivapi.com${materia.Icon}">
+    //         ${materia.Name}
+    //         </div>
+    //         `
+    //     );
+    // }
+
+    if(part && part.Materia.length > 0) {
         return part.Materia.map(
             materia => `<div class="Materia">
             <img src="https://xivapi.com${materia.Icon}">
@@ -244,27 +255,40 @@ function getMateria (part){
             </div>
             `
         );
+    } else {
+        return `<div class="Materia">
+                <h5>No Materia</h5>
+                </div>
+
+        `
     }
 
-    return ``;
 
 }
 
 //Gets and returns all currently equipped gear
 function getGearItem (gear, partName){
 
-    let part = gear[partName];
-    let materia = part.Materia ? getMateria(part) : '' ;
+    let part = gear[partName];     
+    let materia = getMateria(part);
     
-    
+    if(part != undefined){
         return `
         <li class="bodyPart ${partName}">
         <h4>${partName}</h4>
         <img src="https://xivapi.com${part.Item.Icon}">
         ${part.Item.Name}
         ${materia}
-    `;
-     
+        </li>
+    `;} else {
+        return `
+            <li class="bodyPart ${partName}">
+            <h4>${partName}</h4>
+            <h5>Not Equipped</h5>
+            </li>
+        `
+    }
+    
    
 
 }
