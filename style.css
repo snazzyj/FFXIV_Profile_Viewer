@@ -108,6 +108,11 @@ a {
     width: 75%;
 }
 
+.hidden {
+    display: none;
+}
+
+
 .leftSideContainer {
     padding: 5px 10px 5px 10px;
 

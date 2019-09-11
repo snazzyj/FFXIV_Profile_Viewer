@@ -10,7 +10,6 @@ function formWatch() {
         event.preventDefault();
         $('nav').removeClass('nav');
         $('nav').addClass('navTop');
-        $('#js-characterData').hide();
         const playerName = $('#userSearch').val();
         const serverName = document.getElementById('serverList').value;
 
@@ -110,7 +109,7 @@ function profileWatch() {
 
 function displayCharacterData(results) {
     
-    $('#js-characterData').show();
+    $('.characterBox').removeClass('hidden');
     $('.results').empty();
     let toon = results.Character;
 
@@ -211,15 +210,7 @@ function displayJobLevels(toon) {
 
 }
 
-//rename functions
-//gear collection of names
-//if statements
-//if(gear.head)
 
-//leftside arr
-//rightside arr
-
-//Displays Gear currently equipped
 
 function displayGear (toon) {
 
@@ -236,16 +227,6 @@ function displayGear (toon) {
 
 //Checks and returns if materia is present on any of the gear pieces
 function getMateria (part){
-
-    // if(part && part.Materia) {
-    //     return part.Materia.map(
-    //         materia => `<div class="Materia">
-    //         <img src="https://xivapi.com${materia.Icon}">
-    //         ${materia.Name}
-    //         </div>
-    //         `
-    //     );
-    // }
 
     if(part && part.Materia.length > 0) {
         return part.Materia.map(
