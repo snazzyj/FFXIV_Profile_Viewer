@@ -10,6 +10,7 @@ function formWatch() {
         event.preventDefault();
         $('nav').removeClass('nav');
         $('nav').addClass('navTop');
+        $('.characterBox').addClass('hidden');
         const playerName = $('#userSearch').val();
         const serverName = document.getElementById('serverList').value;
 
