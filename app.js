@@ -128,6 +128,7 @@ function displayCharacterData(results) {
     displayStats(toon);
     displayJobLevels(toon);
     displayGear(toon);
+
 }
 
 
@@ -247,12 +248,14 @@ function getMateria (part){
 
 }
 
+
+
 //Gets and returns all currently equipped gear
 function getGearItem (gear, partName){
 
     let part = gear[partName];     
     let materia = getMateria(part);
-    
+
     if(part != undefined){
         return `
         <li class="bodyPart ${partName}">
