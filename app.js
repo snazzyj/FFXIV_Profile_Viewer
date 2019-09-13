@@ -109,12 +109,12 @@ function profileWatch() {
 
 
 function displayCharacterData(results) {
-    
+
     $('.characterBox').removeClass('hidden');
     $('.results').empty();
 
     let toon = results.Character;
- 
+
 
     // let mounts = displayMounts(results);
 
@@ -135,14 +135,14 @@ function displayCharacterData(results) {
 
 }
 
-function calculateMinionTotal (results) {
+function calculateMinionTotal(results) {
 
     let minionTotal = results.Minions.length;
     return `<p>Total Minions : ${minionTotal}</p>`
 
 }
 
-function calculateMountTotal (results) {
+function calculateMountTotal(results) {
 
     let mountTotal = results.Mounts.length;
     return `<p>Total Mounts: ${mountTotal}</p>`
@@ -158,6 +158,9 @@ function displayStats(toon) {
         }
     )
 
+    console.log(typeof(stats));
+    console.log(stats);
+
     $('.str').html(`${stats[0].Value}`);
     $('.dex').html(`${stats[1].Value}`);
     $('.vit').html(`${stats[2].Value}`);
@@ -168,18 +171,18 @@ function displayStats(toon) {
     $('.det').html(`${stats[6].Value}`);
     $('.dh').html(`${stats[7].Value}`);
 
-    $('.def').html(`${stats[8].Value}`);   
+    $('.def').html(`${stats[8].Value}`);
     $('.mdef').html(`${stats[9].Value}`);
-    
+
     $('.atk').html(`${stats[10].Value}`);
     $('.sks').html(`${stats[11].Value}`);
 
     $('.atkMagic').html(`${stats[12].Value}`);
     $('.healMagic').html(`${stats[13].Value}`);
     $('.sps').html(`${stats[14].Value}`);
-    
+
     $('.ten').html(`${stats[15].Value}`);
-    $('.pie').html(`${stats[16].Value}`);    
+    $('.pie').html(`${stats[16].Value}`);
 
 }
 
@@ -197,11 +200,11 @@ function displayJobLevels(toon) {
     $('.sch').html(`${level[9]}`);
     $('.ast').html(`${level[10]}`);
 
-    $('.mnk').html(`${level[4]}`);    
-    $('.drg').html(`${level[5]}`);    
-    $('.nin').html(`${level[6]}`);    
-    $('.sam').html(`${level[7]}`);    
-    
+    $('.mnk').html(`${level[4]}`);
+    $('.drg').html(`${level[5]}`);
+    $('.nin').html(`${level[6]}`);
+    $('.sam').html(`${level[7]}`);
+
     $('.brd').html(`${level[11]}`);
     $('.mch').html(`${level[12]}`);
     $('.dnc').html(`${level[13]}`);
@@ -229,60 +232,81 @@ function displayJobLevels(toon) {
 
 
 
-function displayGear (toon) {
+function displayGear(toon) {
 
-  let leftParts = ['MainHand', 'Head', 'Body', 'Hands', 'Waist', 'Legs', 'Feet'];
-  let rightParts = ['OffHand', 'Earrings', 'Necklace', 'Bracelets', 'Ring1', 'Ring2'];
-  let gear = toon.GearSet.Gear;
-  
-  console.log(gear);
+    let leftParts = ['MainHand', 'Head', 'Body', 'Hands', 'Waist', 'Legs', 'Feet'];
+    let rightParts = ['OffHand', 'Earrings', 'Necklace', 'Bracelets', 'Ring1', 'Ring2'];
+    let gear = toon.GearSet.Gear;
 
-  $('.gear').html(getGearColumns(gear, leftParts, rightParts));
-  $('.ilvl').html(calculateItemLevel(gear));
+    console.log(gear);
+
+    $('.gear').html(getGearColumns(gear, leftParts, rightParts));
+    $('.ilvl').html(calculateItemLevel(gear));
 }
 
 
-function calculateItemLevel (gear) {
+function calculateItemLevel(gear) {
 
-
-
-    let itemLevel = Object.keys(gear).map(
-        function (iLevel) {
-            if(gear[iLevel] != gear['SoulCrystal']) {
-            let value = gear[iLevel].Item.LevelItem
+    let itemList = Object.keys(gear).map(
+        function (key) {
+            let value = gear[key].Item
             return value;
-            }
-        }
-    ) 
-    
-    itemLevel.forEach(
-        function (idx) {
-            for(key in itemLevel) {
-                if(itemLevel[key] == 'undefined') {
-                    itemLevel.slice(idx, 1);
-                    
-                    return itemLevel;
-                }
-            }
+
         }
     )
+    const soulCrystal = ['Soul of the Paladin', 'Soul of the Dark Knight', 'Soul of the Warrior',
+        'Soul of the Gunbreaker', 'Soul of the White Mage', 'Soul of the Astrologian',
+        'Soul of the Scholar', 'Soul of the Bard', 'Soul of the Dancer', 'Soul of the Machinist',
+        'Soul of the Dragoon', 'Soul of the Ninja', 'Soul of the Monk', 'Soul of the Samurai',
+        'Soul of the Red Mage', 'Soul of the Black Mage', 'Soul of the Summoner', 'Soul of the Blue Mage',
+        'Soul of the Alchemist', 'Soul of the Armorer', 'Soul of the Blacksmith',
+        'Soul of the Carpenter', 'Soul of the Culinarian', 'Soul of the Leatherworker',
+        'Soul of the Weaver '];
 
 
-    let result = Object.keys(itemLevel).reduce( 
-        (sum, key) => sum + parseFloat(itemLevel[key] || 0), 0); 
+    for (let i = 0; i < soulCrystal.length; i++) {
+        for (key in itemList) {
+            if (itemList[key].Name == soulCrystal[i]) {
+                itemList.splice(key, 1);
+            }
+        }
+    }
 
-    result = Math.round(result / itemLevel.length);
-
+    let itemLevel = Object.keys(itemList).map(
+        function (key) {
+            let value = itemList[key].LevelItem;
+            return value;
+        }
+    )
+    
+    let ilvl = calculateLevel(itemLevel);
+    
+    return ilvl;
    
-    return result;
+
+
+}
+function calculateLevel(itemLevel) {
+
+    let sum = 0;
+
+    for (let el in itemLevel) {
+        if (itemLevel.hasOwnProperty(el)) {
+            sum += parseFloat(itemLevel[el]);
+
+        }
+
+    }
+    let total = Math.round(sum / itemLevel.length); 
+    return total;
+
+
 }
 
-
-
 //Checks and returns if materia is present on any of the gear pieces
-function getMateria (part){
+function getMateria(part) {
 
-    if(part && part.Materia.length > 0) {
+    if (part && part.Materia.length > 0) {
         return part.Materia.map(
             materia => `<div class="Materia">
             <img src="https://xivapi.com${materia.Icon}">
@@ -303,12 +327,12 @@ function getMateria (part){
 
 
 //Gets and returns all currently equipped gear
-function getGearItem (gear, partName){
+function getGearItem(gear, partName) {
 
-    let part = gear[partName];     
+    let part = gear[partName];
     let materia = getMateria(part);
 
-    if(part != undefined){
+    if (part != undefined) {
         return `
         <li class="bodyPart ${partName}">
         <h4>${partName}</h4>
@@ -316,7 +340,8 @@ function getGearItem (gear, partName){
         ${part.Item.Name}
         ${materia}
         </li>
-    `;} else {
+    `;
+    } else {
         return `
             <li class="bodyPart ${partName}">
             <h4>${partName}</h4>
@@ -324,8 +349,8 @@ function getGearItem (gear, partName){
             </li>
         `
     }
-    
-   
+
+
 
 }
 
@@ -336,12 +361,12 @@ function getGearColumns(gear, column1, column2) {
     let leftColumn = column1.map(
         partName => getGearItem(gear, partName)
     ).join('');
-    
+
 
     let rightColumn = column2.map(
         partName => getGearItem(gear, partName)
     ).join('');
-    
+
 
 
     return `<div class="gearColumns">
