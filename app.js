@@ -86,7 +86,7 @@ function profileWatch() {
 
 
         let playerData = $(this).attr('href');
-        let playerDataUrl = playerData + "?extended=1";
+        let playerDataUrl = playerData + "?extended=1&data=MIMO";
         console.log(playerDataUrl);
 
         fetch(playerDataUrl)
@@ -112,9 +112,11 @@ function displayCharacterData(results) {
     
     $('.characterBox').removeClass('hidden');
     $('.results').empty();
-    let toon = results.Character;
 
-    console.log(toon.Name);
+    let toon = results.Character;
+ 
+
+    // let mounts = displayMounts(results);
 
     $('.nameAndServer').html(`
         <p>${toon.Name}</p>
@@ -125,13 +127,27 @@ function displayCharacterData(results) {
     `)
 
 
-    
+    $('.minions').html(calculateMinionTotal(results));
+    $('.mounts').html(calculateMountTotal(results));
     displayStats(toon);
     displayJobLevels(toon);
     displayGear(toon);
 
 }
 
+function calculateMinionTotal (results) {
+
+    let minionTotal = results.Minions.length;
+    return `<p>Total Minions : ${minionTotal}</p>`
+
+}
+
+function calculateMountTotal (results) {
+
+    let mountTotal = results.Mounts.length;
+    return `<p>Total Mounts: ${mountTotal}</p>`
+
+}
 
 function displayStats(toon) {
 
@@ -141,7 +157,6 @@ function displayStats(toon) {
             return value;
         }
     )
-
 
     $('.str').html(`${stats[0].Value}`);
     $('.dex').html(`${stats[1].Value}`);
@@ -218,14 +233,51 @@ function displayGear (toon) {
 
   let leftParts = ['MainHand', 'Head', 'Body', 'Hands', 'Waist', 'Legs', 'Feet'];
   let rightParts = ['OffHand', 'Earrings', 'Necklace', 'Bracelets', 'Ring1', 'Ring2'];
-
   let gear = toon.GearSet.Gear;
   
   console.log(gear);
 
   $('.gear').html(getGearColumns(gear, leftParts, rightParts));
-
+  $('.ilvl').html(calculateItemLevel(gear));
 }
+
+
+function calculateItemLevel (gear) {
+
+
+
+    let itemLevel = Object.keys(gear).map(
+        function (iLevel) {
+            if(gear[iLevel] != gear['SoulCrystal']) {
+            let value = gear[iLevel].Item.LevelItem
+            return value;
+            }
+        }
+    ) 
+    
+    itemLevel.forEach(
+        function (idx) {
+            for(key in itemLevel) {
+                if(itemLevel[key] == 'undefined') {
+                    itemLevel.slice(idx, 1);
+                    
+                    return itemLevel;
+                }
+            }
+        }
+    )
+
+
+    let result = Object.keys(itemLevel).reduce( 
+        (sum, key) => sum + parseFloat(itemLevel[key] || 0), 0); 
+
+    result = Math.round(result / itemLevel.length);
+
+   
+    return result;
+}
+
+
 
 //Checks and returns if materia is present on any of the gear pieces
 function getMateria (part){
@@ -248,7 +300,6 @@ function getMateria (part){
 
 
 }
-
 
 
 //Gets and returns all currently equipped gear
