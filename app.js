@@ -107,16 +107,16 @@ function profileWatch() {
 }
 
 
-
+//Displays all character data recieved
+//including minion + mount totals
+//Along with current stats for that job
+//Along with current gear equipped
 function displayCharacterData(results) {
 
     $('.characterBox').removeClass('hidden');
     $('.results').empty();
 
     let toon = results.Character;
-
-
-    // let mounts = displayMounts(results);
 
     $('.nameAndServer').html(`
         <p>${toon.Name}</p>
@@ -149,6 +149,7 @@ function calculateMountTotal(results) {
 
 }
 
+//Displays the stats
 function displayStats(toon) {
 
     let stats = Object.keys(toon.GearSet.Attributes).map(
@@ -158,8 +159,6 @@ function displayStats(toon) {
         }
     )
 
-    console.log(typeof(stats));
-    console.log(stats);
 
     $('.str').html(`${stats[0].Value}`);
     $('.dex').html(`${stats[1].Value}`);
@@ -186,7 +185,8 @@ function displayStats(toon) {
 
 }
 
-
+//Grabs the level of each class
+//then displays it
 function displayJobLevels(toon) {
 
     let level = toon.ClassJobs.map(el => el.Level);
@@ -227,24 +227,12 @@ function displayJobLevels(toon) {
     $('.btn').html(`${level[27]}`);
     $('.fsh').html(`${level[28]}`);
 
-
 }
 
 
-
-function displayGear(toon) {
-
-    let leftParts = ['MainHand', 'Head', 'Body', 'Hands', 'Waist', 'Legs', 'Feet'];
-    let rightParts = ['OffHand', 'Earrings', 'Necklace', 'Bracelets', 'Ring1', 'Ring2'];
-    let gear = toon.GearSet.Gear;
-
-    console.log(gear);
-
-    $('.gear').html(getGearColumns(gear, leftParts, rightParts));
-    $('.ilvl').html(calculateItemLevel(gear));
-}
-
-
+//Creates an array of the gear list
+//Then filters out the soul crystal out of the list
+//To allow for a proper Item level calculation
 function calculateItemLevel(gear) {
 
     let itemList = Object.keys(gear).map(
@@ -278,14 +266,14 @@ function calculateItemLevel(gear) {
             return value;
         }
     )
-    
+
     let ilvl = calculateLevel(itemLevel);
-    
+
     return ilvl;
-   
-
-
 }
+
+//Adds every value together
+//Divided by the length of the array
 function calculateLevel(itemLevel) {
 
     let sum = 0;
@@ -297,10 +285,21 @@ function calculateLevel(itemLevel) {
         }
 
     }
-    let total = Math.round(sum / itemLevel.length); 
+    let total = Math.round(sum / itemLevel.length);
     return total;
+}
 
 
+function displayGear(toon) {
+
+    let leftParts = ['MainHand', 'Head', 'Body', 'Hands', 'Waist', 'Legs', 'Feet'];
+    let rightParts = ['OffHand', 'Earrings', 'Necklace', 'Bracelets', 'Ring1', 'Ring2'];
+    let gear = toon.GearSet.Gear;
+
+    console.log(gear);
+
+    $('.gear').html(getGearColumns(gear, leftParts, rightParts));
+    $('.ilvl').html(calculateItemLevel(gear));
 }
 
 //Checks and returns if materia is present on any of the gear pieces
@@ -316,13 +315,11 @@ function getMateria(part) {
         );
     } else {
         return `<div class="Materia">
-                <h5>No Materia</h5>
+                <h5></h5>
                 </div>
 
         `
     }
-
-
 }
 
 
@@ -350,8 +347,6 @@ function getGearItem(gear, partName) {
         `
     }
 
-
-
 }
 
 //breaks up the gear into 2 columns
@@ -373,8 +368,6 @@ function getGearColumns(gear, column1, column2) {
         <ul class="bodyParts left">${leftColumn}</ul>
         <ul class="bodyParts right">${rightColumn}</ul>
     `
-
-
 
 }
 
