@@ -273,30 +273,17 @@ function getItemLevel(gear) {
 
         }
     )
-    const soulCrystal = ['Soul of the Paladin', 'Soul of the Dark Knight', 'Soul of the Warrior',
-        'Soul of the Gunbreaker', 'Soul of the White Mage', 'Soul of the Astrologian',
-        'Soul of the Scholar', 'Soul of the Bard', 'Soul of the Dancer', 'Soul of the Machinist',
-        'Soul of the Dragoon', 'Soul of the Ninja', 'Soul of the Monk', 'Soul of the Samurai',
-        'Soul of the Red Mage', 'Soul of the Black Mage', 'Soul of the Summoner', 'Soul of the Blue Mage',
-        'Soul of the Alchemist', 'Soul of the Armorer', 'Soul of the Blacksmith',
-        'Soul of the Carpenter', 'Soul of the Culinarian', 'Soul of the Leatherworker',
-        'Soul of the Weaver '];
+    
+    const soulCrystalPrefix = 'Soul of the' ;
 
+    let filteredItems = itemList.filter( item => !item.Name.includes(soulCrystalPrefix));
 
-    for (let i = 0; i < soulCrystal.length; i++) {
-        for (key in itemList) {
-            if (itemList[key].Name == soulCrystal[i]) {
-                itemList.splice(key, 1);
-            }
-        }
-    }
-
-    let itemLevel = Object.keys(itemList).map(
+    let itemLevel = Object.keys(filteredItems).map(
         function (key) {
-            let value = itemList[key].LevelItem;
+            let value = filteredItems[key].LevelItem;
             return value;
         }
-    )
+    );
 
     let ilvl = calculateLevel(itemLevel);
 
