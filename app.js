@@ -2,7 +2,6 @@
 const charUrl = "https://xivapi.com/character/search?";
 const profileUrl = "https://xivapi.com/character/";
 
-
 //Watches for search button to be clicked on
 //Initializes get search results
 function formWatch() {
@@ -126,12 +125,33 @@ function displayCharacterData(results) {
         <img class="charPortrait" src=${toon.Portrait}>
     `)
 
-
+ 
     $('.minions').html(calculateMinionTotal(results));
     $('.mounts').html(calculateMountTotal(results));
     displayStats(toon);
     displayJobLevels(toon);
     displayGear(toon);
+    displayActiveJob(toon);
+
+}
+
+function displayActiveJob(toon) {
+
+    let jobName = toon.ActiveClassJob.Job.Abbreviation;
+    let jobLevel = toon.ActiveClassJob.Level;
+    let jobIcon = toon.ActiveClassJob.Job.Icon;
+
+    $('.activeJobIcon').html(`
+    <img class="activeJobIcon" src="https://xivapi.com${jobIcon}">
+    `);
+
+    $('.activeJob').html(`
+    <p>${jobName}</p>
+    `);
+
+    $('.activeLevel').html(`
+    <p>Level: ${jobLevel}</p>
+    `);
 
 }
 
