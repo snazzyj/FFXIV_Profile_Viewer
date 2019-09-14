@@ -193,10 +193,6 @@ a {
     float: right;
 }
 
-.mounts, .minions {
-    float: right;
-}
-
 .mounts {
     padding-right: 10px;
 }
@@ -274,8 +270,9 @@ a {
 
 @media screen and (max-width: 860px) {
     .minionsMounts {
-        float: left;
+        display: inline-block;
         padding-left: 40px;
+        width: 100%;
     }
 }
 
@@ -284,10 +281,6 @@ a {
         width: 75%;
     }
 
-    .minionsMounts {
-        display: inline-block;
-        padding-left: 40px;
-    }
 }
 
 
@@ -299,26 +292,11 @@ a {
         padding-left: 10px;
     }
 
-    .minionsMounts {
-        float: right;
-
-    }
 
 }
 
-@media screen and (max-width: 615px){
-    .minionsMounts {
-
-        padding-left: 40px;
-        float: left;
-    }
-}
 
 @media screen and (max-width: 420px) {
-
-    .minionsMounts {
-        display: inline-block;
-    }
 
     .stats {
         width: 100%;
