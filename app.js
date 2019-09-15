@@ -85,7 +85,7 @@ function profileWatch() {
 
 
         let playerData = $(this).attr('href');
-        let playerDataUrl = playerData + "?extended=1&data=MIMO";
+        let playerDataUrl = playerData + "?extended=1&data=MIMO,FC";
         console.log(playerDataUrl);
 
         fetch(playerDataUrl)
@@ -116,14 +116,17 @@ function displayCharacterData(results) {
     $('.results').empty();
 
     let toon = results.Character;
+    let FC = results.FreeCompany;
+    
 
     $('.nameAndServer').html(`
         <p>${toon.Name}</p>
-        <p>${toon.Server} (${toon.DC}) </p>
-    `)
+        <p>${toon.Server} (${toon.DC})</p>
+        `, checkFCStatus(FC), checkGCStatus(toon)
+        );
     $('.characterPortrait').html(`
         <img class="charPortrait" src=${toon.Portrait}>
-    `)
+    `);
 
  
     $('.minions').html(calculateMinionTotal(results));
@@ -135,11 +138,35 @@ function displayCharacterData(results) {
 
 }
 
+function checkFCStatus(FC) {
+
+    if(FC === null) {
+        return ``
+    } 
+    return `
+    <p>FC: ${FC.Name}</p>;
+    `
+}
+
+function checkGCStatus(toon) {
+
+    let GC = toon.GrandCompany.Company;
+    if(GC === null) {
+        return ``
+    } 
+    return `
+    <p>GC: ${GC.Name}</p>
+    `
+
+}
+
 function displayActiveJob(toon) {
 
     let jobName = toon.ActiveClassJob.Job.Abbreviation;
     let jobLevel = toon.ActiveClassJob.Level;
     let jobIcon = toon.ActiveClassJob.Job.Icon;
+    let maxExp = toon.ActiveClassJob.ExpLevelMax;
+    let currentExp = toon.ActiveClassJob.ExpLevelTogo;
 
     $('.activeJobIcon').html(`
     <img class="activeJobIcon" src="https://xivapi.com${jobIcon}">
@@ -153,7 +180,24 @@ function displayActiveJob(toon) {
     <p>Level: ${jobLevel}</p>
     `);
 
+    $('.exp').html(checkLevel(jobLevel, maxExp, currentExp));
 }
+
+function checkLevel (jobLevel, maxExp, currentExp) {
+
+    if(jobLevel === 80) {
+        return `
+            <p>Max Level</p>
+        `
+    }
+
+    return `
+    <p>Exp: ${currentExp} / ${maxExp}</p>
+    `
+
+
+}
+
 
 function calculateMinionTotal(results) {
 
