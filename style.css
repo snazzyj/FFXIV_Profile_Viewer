@@ -326,6 +326,14 @@ a:hover {
     list-style-type: none;
 }
 
+/* footer */
+
+footer {
+    color: white;
+    position: absolute;
+    right: 0;
+}
+
 @media screen and (max-width: 900px){
     .stats {
         margin-left: 10px;
