@@ -36,7 +36,6 @@ function getSearchResults(playerName, serverName) {
     }
     const queryString = generateQueryString(params);
     const searchUrl = charUrl + queryString;
-    console.log(searchUrl);
 
     fetch(searchUrl)
         .then(response => {
@@ -82,11 +81,8 @@ function profileWatch() {
     $('.characterUrl').on('click', function (event) {
         event.preventDefault();
 
-
-
         let playerData = $(this).attr('href');
         let playerDataUrl = playerData + "?extended=1&data=MIMO,FC";
-        console.log(playerDataUrl);
 
         fetch(playerDataUrl)
             .then(response => {
@@ -117,18 +113,13 @@ function displayCharacterData(results) {
 
     let toon = results.Character;
     let FC = results.FreeCompany;
-    
 
-    $('.nameAndServer').html(`
-        <p>${toon.Name}</p>
-        <p>${toon.Server} (${toon.DC})</p>
-        `, checkFCStatus(FC), checkGCStatus(toon)
-        );
+    $('.nameAndServer').html(displayPlayerInfo(toon, FC));
+
     $('.characterPortrait').html(`
         <img class="charPortrait" src=${toon.Portrait}>
     `);
 
- 
     $('.minions').html(calculateMinionTotal(results));
     $('.mounts').html(calculateMountTotal(results));
     displayStats(toon);
@@ -138,26 +129,45 @@ function displayCharacterData(results) {
 
 }
 
-function checkFCStatus(FC) {
+//Displays the players
+//Name, Server, Data Center, FC and GC
+function displayPlayerInfo(toon, FC) {
 
-    if(FC === null) {
-        return ``
-    } 
+    let name = toon.Name;
+    let server = toon.Server;
+    let dc = toon.DC;
+    let playerFC = checkFCStatus(FC);
+    let playerGC = checkGCStatus(toon);
+
     return `
-    <p>FC: ${FC.Name}</p>;
+        <p>${name}</p>
+        <p>${server} (${dc})</p>
+        ${playerFC}
+        ${playerGC}  
     `
 }
 
+//Checks to see if player is in a Free Company
+function checkFCStatus(FC) {
+
+    if (FC === null) {
+        return ``
+    }
+    return `
+    <p>FC: ${FC.Name}</p>
+    `
+}
+
+//Checks to see if player is in a Grand Company
 function checkGCStatus(toon) {
 
     let GC = toon.GrandCompany.Company;
-    if(GC === null) {
+    if (GC === null) {
         return ``
-    } 
+    }
     return `
     <p>GC: ${GC.Name}</p>
     `
-
 }
 
 function displayActiveJob(toon) {
@@ -183,21 +193,19 @@ function displayActiveJob(toon) {
     $('.exp').html(checkLevel(jobLevel, maxExp, currentExp));
 }
 
-function checkLevel (jobLevel, maxExp, currentExp) {
+function checkLevel(jobLevel, maxExp, currentExp) {
 
-    if(jobLevel === 80) {
+    if (jobLevel === 80) {
         return `
             <p>Max Level</p>
         `
     }
 
     return `
-    <p>Exp: ${currentExp} / ${maxExp}</p>
+    <img src="images/065001.png" alt="Exp Icon" class="expIcon">
+    <p>${currentExp} / ${maxExp}</p>
     `
-
-
 }
-
 
 function calculateMinionTotal(results) {
 
@@ -222,7 +230,6 @@ function displayStats(toon) {
             return value;
         }
     )
-
 
     $('.str').html(`${stats[0].Value}`);
     $('.dex').html(`${stats[1].Value}`);
@@ -293,14 +300,11 @@ function displayJobLevels(toon) {
 
 }
 
-
 function displayGear(toon) {
 
     let leftParts = ['MainHand', 'Head', 'Body', 'Hands', 'Waist', 'Legs', 'Feet'];
     let rightParts = ['OffHand', 'Earrings', 'Necklace', 'Bracelets', 'Ring1', 'Ring2'];
     let gear = toon.GearSet.Gear;
-
-    console.log(gear);
 
     $('.gear').html(getGearColumns(gear, leftParts, rightParts));
     $('.ilvl').html(getItemLevel(gear));
@@ -317,10 +321,10 @@ function getItemLevel(gear) {
 
         }
     )
-    
-    const soulCrystalPrefix = 'Soul of the' ;
 
-    let filteredItems = itemList.filter( item => !item.Name.includes(soulCrystalPrefix));
+    const soulCrystalPrefix = 'Soul of the';
+
+    let filteredItems = itemList.filter(item => !item.Name.includes(soulCrystalPrefix));
 
     let itemLevel = Object.keys(filteredItems).map(
         function (key) {
@@ -402,23 +406,18 @@ function getGearItem(gear, partName) {
 //breaks up the gear into 2 columns
 function getGearColumns(gear, column1, column2) {
 
-
     let leftColumn = column1.map(
         partName => getGearItem(gear, partName)
     ).join('');
-
 
     let rightColumn = column2.map(
         partName => getGearItem(gear, partName)
     ).join('');
 
-
-
     return `<div class="gearColumns">
         <ul class="bodyParts left">${leftColumn}</ul>
         <ul class="bodyParts right">${rightColumn}</ul>
     `
-
 }
 
 

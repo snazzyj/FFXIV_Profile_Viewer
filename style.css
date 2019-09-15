@@ -5,6 +5,7 @@
 body { 
     margin: 0;
     padding: 0;
+    background-color: #2b2b31;
 }
 
 /* Nav Section */
@@ -12,11 +13,18 @@ body {
     padding: 18px 0;
 }
 
+.nav {
+    margin-top: 200px;
+}
+
 .characterSearch {
     display: flex;
     flex-direction: row;
     justify-content: center;
-
+    background-color: #363647;
+    padding: 10px;
+    color: white;
+    box-shadow: inset 0 -2px 10px #000000;
 }
 
 form {
@@ -52,11 +60,6 @@ form {
     margin-top: 5px;
 }
 
-.nav {
-    margin-top: 200px;
-
-}
-
 .navTop {
     margin-top: 0;
 }
@@ -79,27 +82,48 @@ form {
     padding: 0;
 }
 
+.avatar {
+    border-radius: 50%;
+    vertical-align: middle;
+    padding-left: 10px;
+    padding-top: 7px;
+}
+
 .searchResults {
     width: 400px;
-    background-color: gray;
-    height: 96px;
+    background-color: #363647;
+    height: 110px;
     margin: 0 5px;
     list-style-type: none;
     display: inline-block;
     margin-top: 10px;
+    box-shadow: inset 0 0 10px #000000;
+    border-radius: 15px;
+}
+
+.searchResults span {
+    padding-left: 15px;
 }
 
 a {
     display: inline-block;
     width: 400px;
-    height: 96px;
+    height: 110px;
+    color: white;
+    text-decoration: none;
+}
+
+a:visited {
+    color: white;
+}
+
+a:hover {
+    color: white;
 }
 
 /* Character Data Section */
 
 .characterBox {
-
-    background-color: lightblue;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 50px;
@@ -107,18 +131,18 @@ a {
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
+    color: white;
 }
 
 .hidden {
     display: none;
 }
 
-
 .leftSideContainer {
     padding: 5px 10px 5px 10px;
-
-    background-color: aliceblue;
-
+    background-color: #363647;
+    border-radius: 20px;
+    box-shadow: inset 0 0 10px #000000;
 }
 .nameAndServer {
     text-align: center;
@@ -132,13 +156,12 @@ a {
 .characterPortrait {
     width: 320px;
     padding-bottom: 5px;
-
 }
 
 .charPortrait {
     height: auto;
     width: 320px;
-
+    border-radius: 15px;
 }
 
 .jobIcon {
@@ -154,34 +177,43 @@ a {
 
 .jobOverview {
     width: 300px;
+    padding-top: 5px;
     padding-left: 10px;
+    padding-bottom: 10px;
 }
 
 .jobSpecific {
     display: inline-block;
 }
+
 .jobLevel {
     text-align: center;
 }
+
 .row {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    padding-bottom: 3px;
 }
 
 /* Gear/Character Stats section */
 
 .stats {
     width: 60%;
-    background-color: aliceblue;
-
+    color: white;
+    background-color: #363647;
+    border-radius: 20px;
+    margin-left: 20px;
+    box-shadow: inset 0 0 10px #000000;
 }
 
 .header {
     width: 100%;
     padding-left: 15px;
     padding-right: 15px;
+    padding-top: 10px
 }
 
 .header,.activeJob,.activeLevel,.minions,.mounts {
@@ -192,12 +224,21 @@ a {
     padding-left: 10px;
 }
 
+.expIcon {
+    width: 23px;
+    height: 23px;
+    vertical-align: middle;
+}
+
 .exp {
-    padding-left: 40px;
+    padding-left: 10px;
 }
 
 .exp p {
     margin: 0;
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 30px;
 }
 
 .minionsMounts {
@@ -227,14 +268,13 @@ a {
     width: 100%;
     margin: 0;
     border-bottom: 1px solid gray;
-    margin-top: 20px;
-
 }
 
 .attributeNameAndNumber {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    padding-top: 3px;
 }
 
 .leftSide, .rightSide {
@@ -256,24 +296,24 @@ a {
     width: 100%;
     padding-left: 15px;
     padding-right: 15px;
+    padding-top: 15px;
 }
 
-.gearColumns, .gear {
-    background-color: lightskyblue;
+.gearColumns {
+    background-color: #363647;
+    border-radius: 20px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    padding-top: 10px;
     justify-content: center;
-    
+    margin-top: 10px;
+    box-shadow: inset 0 0 10px #000000;
+    min-width: 550px;
+    padding: 0 25px;
 }
 
 .left {
     padding: 0;
-}
-
-.gear {
-    min-width: 550px;
 }
 
 .bodyParts {
@@ -286,11 +326,21 @@ a {
     list-style-type: none;
 }
 
+@media screen and (max-width: 900px){
+    .stats {
+        margin-left: 10px;
+    }
+}
+
 @media screen and (max-width: 860px) {
     .minionsMounts {
         display: inline-block;
         padding-left: 40px;
         width: 100%;
+    }
+
+    .stats {
+        margin-left: 0;
     }
 }
 
@@ -307,28 +357,26 @@ a {
 
 }
 
-
 @media screen and (max-width: 640px) {
-
-
     form {
         width: 300px;
         padding-left: 10px;
     }
 
-
+    .gearColumns {
+        padding: 0 15px;
+    }
 }
 
 @media screen and (max-width: 560px) {
-
-    .gear {
+    .gearColumns {
         min-width: 0;
+        padding: 0 5px;
     }
 
 }
 
 @media screen and (max-width: 420px) {
-
     .stats {
         width: 100%;
     }
@@ -337,12 +385,15 @@ a {
 @Media screen and (max-width: 400px) {
     .searchResults {
         width: 100%;
-        background-color: gray;
-        height: 96px;
+        height: 110px;
         margin: 0 5px;
         list-style-type: none;
         display: inline-block;
         margin-top: 10px;
+    }
+
+    .searchResults span {
+        padding-left: 0;
     }
 
     .nav {
@@ -358,12 +409,12 @@ a {
     }
 }
 
-/* Hover over text for job icons */
+/* Stat Section coloring */
 
-.hover {
-    display: none;
+.attrStr, .attrDex, .attrVit {
+    color: green;
 }
 
-.hover:hover + .jobIcon {
-    display: block;
+.attrInt, .attrMnd {
+    color: #9d45c5;
 }
