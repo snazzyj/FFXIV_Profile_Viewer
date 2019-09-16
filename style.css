@@ -8,20 +8,32 @@ body {
     background-color: #2b2b31;
     padding-bottom: 60px;
 }
+/* Header */
+
+.header {
+    color: white;
+    text-align: center;
+    margin-top: 150px;
+}
+
 
 /* Nav Section */
 .navLogo {
     padding: 18px 0;
 }
 
-.nav {
-    margin-top: 200px;
+.navTitle {
+    padding-top: 28px;
+    padding-right: 100px;
 }
+
+
 
 .characterSearch {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    flex-wrap: wrap;
     background-color: #363647;
     padding: 10px;
     color: white;
@@ -66,6 +78,12 @@ form {
 }
 
 /*Character Results Section */
+
+.error {
+    color: white;
+    text-align: center;
+}
+
 #wrapper {
     width: 100%;
     margin-left: auto;
@@ -210,14 +228,14 @@ a:hover {
     box-shadow: inset 0 0 10px #000000;
 }
 
-.header {
+.charInfo {
     width: 100%;
     padding-left: 15px;
     padding-right: 15px;
     padding-top: 10px
 }
 
-.header,.activeJob,.activeLevel,.minions,.mounts {
+.charInfo,.activeJob,.activeLevel,.minions,.mounts {
     display: inline-block;
 }
 
@@ -347,15 +365,27 @@ a:hover {
     }
 }
 
+@media screen and (max-width: 874px) {
+    .secondaryProp {
+        padding-bottom: 20px;
+    }
+
+    .stats {
+        margin-top: 10px;
+    }
+
+    .navTitle {
+        width: 100%;
+        text-align: center;
+        padding: 0;
+    }
+}
+
 @media screen and (max-width: 860px) {
     .minionsMounts {
         display: inline-block;
         padding-left: 40px;
         width: 100%;
-    }
-
-    .stats {
-        margin-left: 0;
     }
 }
 
@@ -391,6 +421,12 @@ a:hover {
 
 }
 
+@media screen and (max-width: 480px){
+    .right {
+        padding-left: 0;
+    }
+}
+
 @media screen and (max-width: 420px) {
     .stats {
         width: 100%;
@@ -407,14 +443,21 @@ a:hover {
         margin-top: 10px;
     }
 
+    .characterSearch {
+        padding-bottom: 15px;
+    }
+
     .searchResults span {
         padding-left: 0;
+    }
+    
+    .header {
+        margin-top: 50px;
     }
 
     .nav {
         padding-left: 10px;
         padding-right: 10px;
-        margin-top: 200px;
     }
 
     .navTop {

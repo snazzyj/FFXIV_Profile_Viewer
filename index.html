@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <meta>
     <title>FFXIV Profile Gear Viewer</title>
     <meta name="description" content="Final Fantasy 14 Profile and Gear viewer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,16 +13,23 @@
 
 <body>
 
+    <header class="header" role="heading">
+        <h1>XIV Character Tracker</h1>
+        <h3>View job levels, gear, stats, minion and mount count! Kupo!</h3>
+    </header>
 
-
-    <nav class="nav">
+    <nav class="nav" role="navigation">
+            
         <div class="characterSearch">
+                <section class="navTitle hidden">
+                        <h1>XIV Character Tracker</h1>
+                    </section>
             <div class="logo">
                 <img class="navLogo" src="images/aetheryte.png" alt="aetheryte">
             </div>
             <form id="js-form">
                 <label for="userSearch"></label>
-                <input type="text" id="userSearch" placeholder="Enter Character Name">
+                <input type="text" id="userSearch" placeholder="Enter a Character Name">
                 <label for="serverList" class="serverLabel">Server</label>
                 <select id="serverList">
                     <optgroup label="Aether">
@@ -64,6 +70,9 @@
     </nav>
 
     <section id="js-results">
+        <div class="error">
+            
+        </div>
         <div id="wrapper">
             <ul class="results">
             </ul>
@@ -76,13 +85,13 @@
 
         <div class="characterBox hidden">
 
-            <div class="leftSideContainer">
+            <section class="leftSideContainer">
                 <div class="nameAndServer">
                 </div>
                 <div class="characterPortrait">
                 </div>
 
-                <div class="jobOverview">
+                <section class="jobOverview">
 
                     <div class="row">
 
@@ -240,12 +249,12 @@
                         </div>
 
                     </div>
-                </div>
-            </div>
+                </section>
+            </section>
 
-            <div class="stats">
+            <section class="stats">
 
-                <div class="header">
+                <div class="charInfo">
                     <div class="activeJobIcon">
                     </div>
                     <div class="activeJob">
@@ -270,7 +279,7 @@
                     </div>
                 </div>
 
-                <div class="mainAttribute">
+                <section class="mainAttribute">
                     <h4 class="title">Attributes</h4>
                     <div class="leftSide">
                         <div class="attributeNameAndNumber">
@@ -298,9 +307,9 @@
                     </div>
 
 
-                </div>
+                </section>
 
-                <div class="secondaryProp">
+                <section class="secondaryProp">
                     <div class="leftSide">
                         <h4 class="title">Offensive Properties</h4>
                         <div class="attributeNameAndNumber">
@@ -331,9 +340,9 @@
 
                     </div>
 
-                </div>
+                </section>
 
-                <div class="secondaryProp">
+                <section class="secondaryProp">
                     <div class="leftSide">
                         <h4 class="title">Physical Properties</h4>
                         <div class="attributeNameAndNumber">
@@ -362,9 +371,9 @@
                             <div class="sps"></div>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <div class="secondaryProp">
+                <section class="secondaryProp">
                     <div class="leftSide">
                         <h4 class="title">Gear</h4>
                         <div class="attributeNameAndNumber">
@@ -385,16 +394,16 @@
                             <div class="pie"></div>
                         </div>
                     </div>
-                </div>
+                </section>
 
 
 
 
-            </div>
+            </section>
 
 
-            <div class="gear">
-            </div>
+            <section class="gear">
+            </section>
 
 
 

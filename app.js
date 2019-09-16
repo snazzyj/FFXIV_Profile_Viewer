@@ -11,6 +11,10 @@ function formWatch() {
         $('nav').addClass('navTop');
         $('.characterBox').addClass('hidden');
         $('.footer').addClass('bottom');
+        $('.header').addClass('hidden');
+        $('.navTitle').removeClass('hidden');
+        $('.error').empty();
+
         const playerName = $('#userSearch').val();
         const serverName = document.getElementById('serverList').value;
 
@@ -37,6 +41,7 @@ function getSearchResults(playerName, serverName) {
     }
     const queryString = generateQueryString(params);
     const searchUrl = charUrl + queryString;
+    console.log(searchUrl);
 
     fetch(searchUrl)
         .then(response => {
@@ -50,6 +55,8 @@ function getSearchResults(playerName, serverName) {
         .catch(error => {
             alert(`Something went wrong: ${error.message}`);
         })
+
+
 }
 
 //Displays the initial search results
@@ -58,6 +65,12 @@ function getSearchResults(playerName, serverName) {
 function displaySearchResults(data) {
     $('.footer').removeClass('bottom');
     $('.results').empty();
+
+    if(data.Results.length === 0) {
+        $('.error').html(`
+            <h2>Character Not Found</h2>
+        `)
+    }
 
     for (let idx = 0; idx < data.Results.length; idx++) {
         $('.results').append(`
