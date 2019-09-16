@@ -156,7 +156,7 @@ function checkFCStatus(FC) {
         return ``
     }
     return `
-    <p>FC: ${FC.Name}</p>
+    <p>Free Company: ${FC.Name}</p>
     `
 }
 
@@ -168,7 +168,7 @@ function checkGCStatus(toon) {
         return ``
     }
     return `
-    <p>GC: ${GC.Name}</p>
+    <p>Grand Company: ${GC.Name}</p>
     `
 }
 
