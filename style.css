@@ -6,6 +6,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #2b2b31;
+    padding-bottom: 60px;
 }
 
 /* Nav Section */
@@ -328,10 +329,16 @@ a:hover {
 
 /* footer */
 
-footer {
+.footer {
     color: white;
     position: absolute;
-    right: 0;
+    width: 100%;
+    text-align: right;
+    height: 60px;
+}
+
+.bottom {
+    bottom: 0;
 }
 
 @media screen and (max-width: 900px){

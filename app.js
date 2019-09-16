@@ -109,6 +109,7 @@ function profileWatch() {
 function displayCharacterData(results) {
 
     $('.characterBox').removeClass('hidden');
+    $('.footer').removeClass('bottom');
     $('.results').empty();
 
     let toon = results.Character;
