@@ -56,7 +56,7 @@ function getSearchResults(playerName, serverName) {
 //Found from the fetch
 //Displays them their own div box
 function displaySearchResults(data) {
-
+    $('.footer').removeClass('bottom');
     $('.results').empty();
 
     for (let idx = 0; idx < data.Results.length; idx++) {
@@ -110,7 +110,7 @@ function profileWatch() {
 function displayCharacterData(results) {
 
     $('.characterBox').removeClass('hidden');
-    $('.footer').removeClass('bottom');
+    
     $('.results').empty();
 
     let toon = results.Character;
