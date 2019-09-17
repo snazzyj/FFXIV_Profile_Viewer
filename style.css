@@ -85,6 +85,13 @@ form {
 .error {
     color: white;
     text-align: center;
+    font-size: 25px;
+}
+
+.loading {
+    color: white;
+    text-align: center;
+    font-size: 30px;
 }
 
 #wrapper {
@@ -246,6 +253,7 @@ a:hover {
     margin-left: 20px;
     box-shadow: inset 0 0 10px #000000;
     font-family: 'Open Sans', sans-serif;
+    position: relative;
 }
 
 .charInfo {
@@ -350,32 +358,74 @@ a:hover {
     padding-top: 15px;
 }
 
-.gearColumns {
+
+.gearColumns, .glamColumns {
     background-color: #363647;
     border-radius: 20px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
     margin-top: 10px;
     box-shadow: inset 0 0 10px #000000;
-    min-width: 550px;
     padding: 0 25px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.left {
+.left, .right {
     padding: 0;
 }
 
 .bodyParts {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .bodyPart {
     height: auto;
     list-style-type: none;
+    padding-right: 20px;
 }
+
+.Materia {
+    padding-top: 10px;
+}
+
+.gearBtn {
+    position: absolute;
+    bottom: 20px;
+    left: 25px;
+    width: 45%;
+    height: 75px;
+}
+
+.glamBtn {
+    position: absolute;
+    bottom: 20px;
+    right: 25px;
+    width: 45%;
+    height: 75px;
+}
+
+.gearBtn, .glamBtn {
+    border-radius: 20px;
+    background-color: #2b2b31;
+    border: none;
+    box-shadow: inset 0 0 10px #000000;
+    color: white;
+    font-size: 24px;
+    opacity: 0.7;
+}
+
+.gearBtn:hover, .glamBtn:hover {
+    background-color:#363647;
+    opacity: 1;
+    transition: ease-in 0.1s;
+}
+
 
 /* footer */
 
@@ -384,16 +434,10 @@ a:hover {
     width: 100%;
     text-align: right;
     height: 60px;
-}
-
-.footerPos {
-    position: absolute;
-}
-
-.bottom {
     bottom: 0;
-    position: fixed;
 }
+
+
 
 @media screen and (max-width: 900px){
     .stats {
@@ -401,19 +445,29 @@ a:hover {
     }
 }
 
-@media screen and (max-width: 874px) {
-    .secondaryProp {
-        padding-bottom: 20px;
-    }
-
+@media screen and (max-width: 874px){
     .stats {
         margin-top: 10px;
+    }
+
+    .secondaryProp:nth-of-type(4) {
+        padding-bottom: 150px;
     }
 
     .navTitle {
         width: 100%;
         text-align: center;
         padding: 0;
+    }
+
+    .gearBtn {
+        left: 0;
+        bottom: 0;
+    }
+
+    .glamBtn {
+        right: 0;
+        bottom: 0;
     }
 }
 
@@ -453,6 +507,10 @@ a:hover {
     .gearColumns {
         min-width: 0;
         padding: 0 5px;
+    }
+
+    .bodyParts {
+        justify-content: flex-start;
     }
 
 }

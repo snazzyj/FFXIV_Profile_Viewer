@@ -12,9 +12,9 @@ function formWatch() {
         $('nav').removeClass('nav');
         $('nav').addClass('navTop');
         $('.characterBox').addClass('hidden');
-        $('.footer').addClass('bottom');
         $('.header').addClass('hidden');
         $('.navTitle').removeClass('hidden');
+        $('.footer').removeClass('hidden');
         $('.error').empty();
 
         const playerName = $('#userSearch').val();
@@ -64,7 +64,7 @@ function getSearchResults(playerName, serverName) {
 //Found from the fetch
 //Displays them their own div box
 function displaySearchResults(data) {
-    $('.footer').removeClass('bottom');
+
     $('.results').empty();
 
     if(data.Results.length === 0) {
@@ -95,6 +95,8 @@ function profileWatch() {
 
     $('.characterUrl').on('click', function (event) {
         event.preventDefault();
+        $('body').css('cursor', 'wait');
+        $('.loading').removeClass('hidden')
 
         let dataParams = "?extended=1&data=MIMO,FC"
         let playerData = $(this).attr('href');
@@ -125,8 +127,10 @@ function profileWatch() {
 function displayCharacterData(results) {
 
     $('.characterBox').removeClass('hidden');
-    
+    $('.glamour').hide();
     $('.results').empty();
+    $('body').css('cursor', 'default');
+    $('.loading').addClass('hidden');
 
     let toon = results.Character;
     let FC = results.FreeCompany;
@@ -143,6 +147,19 @@ function displayCharacterData(results) {
     displayJobLevels(toon);
     displayGear(toon);
     displayActiveJob(toon);
+
+    $('.glamBtn').on('click', function (e) {
+        e.preventDefault();
+        $('.gear').hide();
+        $('.glamour').show();
+    })
+    $('.gearBtn').on('click', function (e) {
+        e.preventDefault();
+        $('.gear').show();
+        $('.glamour').hide();
+    })
+
+    
 
 }
 
@@ -322,6 +339,7 @@ function displayGear(toon) {
     let gear = toon.GearSet.Gear;
 
     $('.gear').html(getGearColumns(gear, leftParts, rightParts));
+    $('.glamour').html(getGlamColumns(gear, leftParts, rightParts));
     $('.ilvl').html(getItemLevel(gear));
 }
 //Creates an array of the gear list
@@ -381,7 +399,7 @@ function getMateria(part) {
             ${materia.Name}
             </div>
             `
-        );
+        ).join('');
     } else {
         return `<div class="Materia">
                 <h5></h5>
@@ -433,6 +451,46 @@ function getGearColumns(gear, column1, column2) {
         <ul class="bodyParts left">${leftColumn}</ul>
         <ul class="bodyParts right">${rightColumn}</ul>
     `
+}
+
+function getGlamColumns(gear, column1, column2) {
+
+    let leftColumn = column1.map(
+        partName => getGlamItem(gear, partName)
+    ).join('');
+    
+    let rightColumn = column2.map(
+        partName => getGlamItem(gear, partName)
+    ).join('');
+
+    return `
+        <div class="glamColumns">
+        <ul class="bodyParts left">${leftColumn}</ul>
+        <ul class="bodyParts right">${rightColumn}</ul>
+    `
+}
+
+function getGlamItem(gear, partName){
+
+    let part = gear[partName];
+
+    if(part.Mirage != undefined || part.Mirage != null) {
+        return `
+            <li class="bodyPart ${partName}">
+            <h4>${partName}</h4>
+            <img src="https://xivapi.com${part.Mirage.Icon}">
+            ${part.Mirage.Name}
+            </li>
+        `
+    } else {
+        return `
+            <li class="bodyPart ${partName}">
+            <h4>${partName}</h4>
+            <h5>No Glamour Equipped</h5>
+            </li>
+        `;
+    }
+
 }
 
 
