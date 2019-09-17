@@ -435,7 +435,7 @@ a:hover {
     width: 100%;
     text-align: right;
     height: 60px;
-    bottom: 0;
+    padding-right: 125px;
 }
 
 

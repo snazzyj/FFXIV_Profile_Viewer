@@ -14,7 +14,6 @@ function formWatch() {
         $('.characterBox').addClass('hidden');
         $('.header').addClass('hidden');
         $('.navTitle').removeClass('hidden');
-        $('.footer').removeClass('hidden');
         $('.error').empty();
 
         const playerName = $('#userSearch').val();
@@ -125,7 +124,8 @@ function profileWatch() {
 //Along with current stats for that job
 //Along with current gear equipped
 function displayCharacterData(results) {
-
+    
+    $('.footer').removeClass('hidden');
     $('.characterBox').removeClass('hidden');
     $('.glamour').hide();
     $('.results').empty();
