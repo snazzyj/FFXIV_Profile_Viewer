@@ -1,6 +1,8 @@
 
-const charUrl = "https://xivapi.com/character/search?";
+const charUrl = "xivapi.com/character/search?";
 const profileUrl = "https://xivapi.com/character/";
+const corsApiHost = "https://cors-anywhere.herokuapp.com/";
+
 
 //Watches for search button to be clicked on
 //Initializes get search results
@@ -40,8 +42,7 @@ function getSearchResults(playerName, serverName) {
         server: serverName
     }
     const queryString = generateQueryString(params);
-    const searchUrl = charUrl + queryString;
-    console.log(searchUrl);
+    const searchUrl = corsApiHost + charUrl + queryString;   
 
     fetch(searchUrl)
         .then(response => {
@@ -95,8 +96,9 @@ function profileWatch() {
     $('.characterUrl').on('click', function (event) {
         event.preventDefault();
 
+        let dataParams = "?extended=1&data=MIMO,FC"
         let playerData = $(this).attr('href');
-        let playerDataUrl = playerData + "?extended=1&data=MIMO,FC";
+        let playerDataUrl = playerData + dataParams;
 
         fetch(playerDataUrl)
             .then(response => {

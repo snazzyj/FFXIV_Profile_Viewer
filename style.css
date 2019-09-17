@@ -16,7 +16,6 @@ body {
     margin-top: 150px;
 }
 
-
 /* Nav Section */
 .navLogo {
     padding: 18px 0;
@@ -26,8 +25,6 @@ body {
     padding-top: 28px;
     padding-right: 100px;
 }
-
-
 
 .characterSearch {
     display: flex;
@@ -425,6 +422,10 @@ a:hover {
     .right {
         padding-left: 0;
     }
+
+    .header {
+        margin-top: 50px;
+    }
 }
 
 @media screen and (max-width: 420px) {
@@ -451,10 +452,6 @@ a:hover {
         padding-left: 0;
     }
     
-    .header {
-        margin-top: 50px;
-    }
-
     .nav {
         padding-left: 10px;
         padding-right: 10px;
@@ -476,3 +473,5 @@ a:hover {
 .attrInt, .attrMnd {
     color: #9d45c5;
 }
+
+/* Font Styling */
