@@ -28,6 +28,10 @@ body {
     font-size: 26px;
 }
 
+.navTitle a:hover{
+    text-decoration: underline;
+}
+
 .characterSearch {
     display: flex;
     flex-direction: row;
@@ -121,6 +125,15 @@ form {
 
 .searchResults span {
     padding-left: 15px;
+}
+
+.characterUrl {
+    opacity: 0.5;
+}
+
+.characterUrl:hover {
+    opacity: 1;
+    transition: ease-in 0.2s;
 }
 
 a {
