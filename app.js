@@ -213,9 +213,7 @@ function displayActiveJob(toon) {
 function checkLevel(jobLevel, maxExp, currentExp) {
 
     if (jobLevel === 80) {
-        return `
-            <p>Max Level</p>
-        `
+        return ``
     }
 
     return `
