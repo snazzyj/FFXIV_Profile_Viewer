@@ -100,7 +100,7 @@ function profileWatch() {
         let dataParams = "?extended=1&data=MIMO,FC"
         let playerData = $(this).attr('href');
         let playerDataUrl = playerData + dataParams;
-
+        console.log(playerDataUrl)
         fetch(playerDataUrl)
             .then(response => {
                 if (response.ok) {
@@ -341,7 +341,9 @@ function displayGear(toon) {
     $('.gear').html(getGearColumns(gear, leftParts, rightParts));
     $('.glamour').html(getGlamColumns(gear, leftParts, rightParts));
     $('.ilvl').html(getItemLevel(gear));
+
 }
+
 //Creates an array of the gear list
 //Then filters out the soul crystal out of the list
 //To allow for a proper Item level calculation
@@ -392,7 +394,7 @@ function calculateLevel(itemLevel) {
 //Checks and returns if materia is present on any of the gear pieces
 function getMateria(part) {
 
-    if (part && part.Materia.length > 0) {
+    if (part && part.Materia.length > 0 && part != undefined) {
         return part.Materia.map(
             materia => `<div class="Materia">
             <img src="https://xivapi.com${materia.Icon}">
@@ -415,8 +417,9 @@ function getGearItem(gear, partName) {
 
     let part = gear[partName];
     let materia = getMateria(part);
-
+    
     if (part != undefined) {
+
         return `
         <li class="bodyPart ${partName}">
         <h4>${partName}</h4>
@@ -470,28 +473,41 @@ function getGlamColumns(gear, column1, column2) {
     `
 }
 
+
 function getGlamItem(gear, partName){
 
-    let part = gear[partName];
+    let glamPart = gear[partName];
+    let dye = getDyeColor(glamPart);
 
-    if(part.Mirage != undefined || part.Mirage != null) {
+    if(glamPart != undefined && glamPart.Mirage != undefined && glamPart.Mirage != null) {
         return `
             <li class="bodyPart ${partName}">
             <h4>${partName}</h4>
-            <img src="https://xivapi.com${part.Mirage.Icon}">
-            ${part.Mirage.Name}
+            <img src="https://xivapi.com${glamPart.Mirage.Icon}">
+            ${glamPart.Mirage.Name}
+            ${dye}
             </li>
         `
     } else {
-        return `
-            <li class="bodyPart ${partName}">
-            <h4>${partName}</h4>
-            <h5>No Glamour Equipped</h5>
-            </li>
-        `;
+        return ``;
     }
 
 }
+
+function getDyeColor(glamPart){
+
+    if(glamPart != null && glamPart.Dye != null) {
+        return `
+            <div class="dyeColor">
+            <img src="https://xivapi.com${glamPart.Dye.Icon}" alt="${glamPart.Dye.Name}">
+            ${glamPart.Dye.Name}
+            </div>
+
+        `
+    }
+
+}
+
 
 
 $(formWatch);
