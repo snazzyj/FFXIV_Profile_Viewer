@@ -16,23 +16,23 @@ This app allows for Final Fantasy 14 players to view their own characters or oth
 
 
 # Screenshots
-Home :
+**Home** :
 
 ![alt text](https://github.com/snazzyj/xivcharactertracker/blob/master/images/screenshots/home.png "Home Page")
 
-Search Results :
+**Search Results** :
 
 ![alt text](https://github.com/snazzyj/xivcharactertracker/blob/master/images/screenshots/searchResults.png "Search Results")
 
-Main Character Screen :
+**Main Character Screen** :
 
 ![alt text](https://github.com/snazzyj/xivcharactertracker/blob/master/images/screenshots/mainCharacter.png "Main Character Screen")
 
-Gear :
+**Gear** :
 
 ![alt text](https://github.com/snazzyj/xivcharactertracker/blob/master/images/screenshots/gear.png "Gear Section")
 
-Glam :
+**Glam** :
 
 ![alt text](https://github.com/snazzyj/xivcharactertracker/blob/master/images/screenshots/glam.png "Glam Section")
 
