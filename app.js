@@ -97,7 +97,7 @@ function profileWatch() {
         $('body').css('cursor', 'wait');
         $('.loading').removeClass('hidden')
 
-        let dataParams = "?extended=1&data=MIMO,FC"
+        let dataParams = "?extended=1&data=MIMO,FC,CJ"
         let playerData = $(this).attr('href');
         let playerDataUrl = playerData + dataParams;
         console.log(playerDataUrl)
