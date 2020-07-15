@@ -170,6 +170,7 @@ a:hover {
     justify-content: center;
     width: 100%;
     color: white;
+    position: relative;
 }
 
 .hidden {
@@ -181,6 +182,7 @@ a:hover {
     background-color: #363647;
     border-radius: 20px;
     box-shadow: inset 0 0 10px #000000;
+    max-height: 825px;
 }
 .nameAndServer {
     text-align: center;
@@ -245,7 +247,7 @@ a:hover {
 
 /* Gear/Character Stats section */
 
-.stats {
+.stats, .gear, .glamour {
     width: 60%;
     color: white;
     background-color: #363647;
@@ -281,8 +283,6 @@ a:hover {
 .activeLevel {
     padding-left: 10px;
 }
-
-
 
 .expIcon {
     width: 23px;
@@ -360,28 +360,13 @@ a:hover {
 
 
 .gearColumns, .glamColumns {
-    background-color: #363647;
-    border-radius: 20px;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    margin-top: 10px;
-    box-shadow: inset 0 0 10px #000000;
-    padding: 0 25px;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+    justify-content: space-evenly;
 }
 
 .left, .right {
     padding: 0;
-}
-
-.bodyParts {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
 }
 
 .bodyPart {
@@ -394,31 +379,25 @@ a:hover {
     padding-top: 10px;
 }
 
-.gearBtn {
+.navBtns {
     position: absolute;
-    bottom: 20px;
-    left: 25px;
-    width: 45%;
-    height: 75px;
+    top: -55px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.glamBtn {
-    position: absolute;
-    bottom: 20px;
-    right: 25px;
-    width: 45%;
-    height: 75px;
-}
-
-.gearBtn, .glamBtn {
+.gearBtn, .glamBtn, .statsBtn {
     border-radius: 20px;
-    background-color: #2b2b31;
+    background-color: #363647;
     border: none;
     box-shadow: inset 0 0 10px #000000;
     color: white;
     font-size: 24px;
     opacity: 0.7;
     cursor: pointer;
+    width: 200px;
+    height: 50px;
 }
 
 .gearBtn:hover, .glamBtn:hover {
@@ -502,6 +481,10 @@ a:hover {
     .gearColumns {
         padding: 0 15px;
     }
+
+    .gearBtn, .glamBtn, .statsBtn {
+        width: 125px;
+    }
 }
 
 @media screen and (max-width: 560px) {
@@ -537,6 +520,10 @@ a:hover {
 @media screen and (max-width: 420px) {
     .stats {
         width: 100%;
+    }
+
+    .gearBtn, .glamBtn, .statsBtn {
+        width: 100px;
     }
 }
 

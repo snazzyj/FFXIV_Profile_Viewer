@@ -100,7 +100,6 @@ function profileWatch() {
         let dataParams = "?extended=1&data=MIMO,FC,CJ"
         let playerData = $(this).attr('href');
         let playerDataUrl = playerData + dataParams;
-        console.log(playerDataUrl)
         fetch(playerDataUrl)
             .then(response => {
                 if (response.ok) {
@@ -127,7 +126,6 @@ function displayCharacterData(results) {
     
     $('.footer').removeClass('hidden');
     $('.characterBox').removeClass('hidden');
-    $('.glamour').hide();
     $('.results').empty();
     $('body').css('cursor', 'default');
     $('.loading').addClass('hidden');
@@ -150,17 +148,22 @@ function displayCharacterData(results) {
 
     $('.glamBtn').on('click', function (e) {
         e.preventDefault();
-        $('.gear').hide();
-        $('.glamour').show();
+        $('.glamour').removeClass('hidden');
+        $('.gear').addClass('hidden');
+        $('.stats').addClass('hidden')
     })
     $('.gearBtn').on('click', function (e) {
         e.preventDefault();
-        $('.gear').show();
-        $('.glamour').hide();
+        $('.gear').removeClass('hidden');
+        $('.glamour').addClass('hidden');
+        $('.stats').addClass('hidden')
     })
-
-    
-
+    $('.statsBtn').on('click', function (e) {
+        e.preventDefault();
+        $('.stats').removeClass('hidden');
+        $('.gear').addClass('hidden');
+        $('.glamour').addClass('hidden');
+    })
 }
 
 //Displays the players
@@ -495,19 +498,18 @@ function getGlamItem(gear, partName){
 }
 
 function getDyeColor(glamPart){
-
-    if(glamPart != null && glamPart.Dye != null) {
-        return `
-            <div class="dyeColor">
-            <img src="https://xivapi.com${glamPart.Dye.Icon}" alt="${glamPart.Dye.Name}">
-            ${glamPart.Dye.Name}
-            </div>
-
-        `
-    }
-
+    if(glamPart != null && glamPart != undefined) {
+        if(glamPart.Dye != null) {
+            return `
+                <div class="dyeColor">
+                <img src="https://xivapi.com${glamPart.Dye.Icon}" alt="${glamPart.Dye.Name}">
+                ${(glamPart.Dye) ? glamPart.Dye.Name : ''}
+                </div>
+            `
+        } else {
+            return ""
+        }
+    } 
 }
-
-
 
 $(formWatch);
