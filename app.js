@@ -553,7 +553,7 @@ function getMinions(minions) {
     return minions.map((minion) => {
         return `
         <li class="wrapper" key=${minion.Name}>
-            <img src=${minion.Icon} alt=${minion.Name} title=${minion.Name}/>
+            <img src=${minion.Icon} alt="${minion.Name}" title="${minion.Name}"/>
         </li>
         `
     })
@@ -563,7 +563,7 @@ function getMounts(mounts) {
     return mounts.map((mount) => {
         return `
         <li class="wrapper" key=${mount.Name}>
-            <img src=${mount.Icon} alt=${mount.Name} title=${mount.Name}/>
+            <img src=${mount.Icon} alt="${mount.Name}" title="${mount.Name}"/>
         </li>
         `
     })
