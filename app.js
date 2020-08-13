@@ -22,7 +22,7 @@ function formWatch() {
         getSearchResults(playerName, serverName);
 
     })
-}
+};
 
 //Converts params into a string
 function generateQueryString(params) {
@@ -31,7 +31,7 @@ function generateQueryString(params) {
         .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`);
     return queryItems.join('&');
 
-}
+};
 
 //Fetches the XIVAPI to gather search results
 //Based on Character + Server Name
@@ -57,7 +57,7 @@ function getSearchResults(playerName, serverName) {
         })
 
 
-}
+};
 
 //Displays the initial search results
 //Found from the fetch
@@ -87,7 +87,7 @@ function displaySearchResults(data) {
        ` )
     };
     profileWatch();
-}
+};
 
 //Watches for the click on the mini Profile
 function profileWatch() {
@@ -100,6 +100,7 @@ function profileWatch() {
         let dataParams = "?extended=1&data=MIMO,FC,CJ"
         let playerData = $(this).attr('href');
         let playerDataUrl = playerData + dataParams;
+        console.log({playerDataUrl})
         fetch(playerDataUrl)
             .then(response => {
                 if (response.ok) {
@@ -115,7 +116,7 @@ function profileWatch() {
 
     })
 
-}
+};
 
 
 //Displays all character data recieved
@@ -132,6 +133,8 @@ function displayCharacterData(results) {
 
     let toon = results.Character;
     let FC = results.FreeCompany;
+    let minions = results.Minions;
+    let mounts = results.Mounts;
 
     $('.nameAndServer').html(displayPlayerInfo(toon, FC));
 
@@ -139,32 +142,56 @@ function displayCharacterData(results) {
         <img class="charPortrait" src=${toon.Portrait}>
     `);
 
-    $('.minions').html(calculateMinionTotal(results));
-    $('.mounts').html(calculateMountTotal(results));
+    $('.minionCount').html(calculateMinionTotal(results));
+    $('.mountCount').html(calculateMountTotal(results));
     displayStats(toon);
     displayJobLevels(toon);
     displayGear(toon);
     displayActiveJob(toon);
+    displayMinions(minions);
+    displayMounts(mounts);
 
     $('.glamBtn').on('click', function (e) {
         e.preventDefault();
         $('.glamour').removeClass('hidden');
         $('.gear').addClass('hidden');
-        $('.stats').addClass('hidden')
-    })
+        $('.stats').addClass('hidden');
+        $('.minions').addClass('hidden');
+        $('.mounts').addClass('hidden');
+    });
     $('.gearBtn').on('click', function (e) {
         e.preventDefault();
         $('.gear').removeClass('hidden');
         $('.glamour').addClass('hidden');
-        $('.stats').addClass('hidden')
-    })
+        $('.stats').addClass('hidden');
+        $('.minions').addClass('hidden');
+        $('.mounts').addClass('hidden');
+    });
     $('.statsBtn').on('click', function (e) {
         e.preventDefault();
         $('.stats').removeClass('hidden');
         $('.gear').addClass('hidden');
         $('.glamour').addClass('hidden');
-    })
-}
+        $('.minions').addClass('hidden');
+        $('.mounts').addClass('hidden');
+    });
+    $('.minionsBtn').on('click', function (e) {
+        e.preventDefault;
+        $('.minions').removeClass('hidden');
+        $('.stats').addClass('hidden');
+        $('.gear').addClass('hidden');
+        $('.glamour').addClass('hidden');
+        $('.mounts').addClass('hidden');
+    });
+    $('.mountsBtn').on('click', function (e) {
+        e.preventDefault;
+        $('.mounts').removeClass('hidden');
+        $('.stats').addClass('hidden');
+        $('.gear').addClass('hidden');
+        $('.glamour').addClass('hidden');
+        $('.minions').addClass('hidden');
+    });
+};
 
 //Displays the players
 //Name, Server, Data Center, FC and GC
@@ -182,7 +209,7 @@ function displayPlayerInfo(toon, FC) {
         ${playerFC}
         ${playerGC}  
     `
-}
+};
 
 //Checks to see if player is in a Free Company
 function checkFCStatus(FC) {
@@ -193,7 +220,7 @@ function checkFCStatus(FC) {
     return `
     <p>Free Company: ${FC.Name}</p>
     `
-}
+};
 
 //Checks to see if player is in a Grand Company
 function checkGCStatus(toon) {
@@ -205,7 +232,7 @@ function checkGCStatus(toon) {
     return `
     <p>Grand Company: ${GC.Name}</p>
     `
-}
+};
 
 function displayActiveJob(toon) {
 
@@ -228,7 +255,7 @@ function displayActiveJob(toon) {
     `);
 
     $('.exp').html(checkLevel(jobLevel, maxExp, currentExp));
-}
+};
 
 function checkLevel(jobLevel, maxExp, currentExp) {
 
@@ -240,21 +267,21 @@ function checkLevel(jobLevel, maxExp, currentExp) {
     <img src="images/065001.png" alt="Exp Icon" class="expIcon">
     <p>${currentExp} / ${maxExp}</p>
     `
-}
+};
 
 function calculateMinionTotal(results) {
 
     let minionTotal = results.Minions.length;
     return `<p>Total Minions : ${minionTotal}</p>`
 
-}
+};
 
 function calculateMountTotal(results) {
 
     let mountTotal = results.Mounts.length;
     return `<p>Total Mounts: ${mountTotal}</p>`
 
-}
+};
 
 //Displays the stats
 function displayStats(toon) {
@@ -289,7 +316,7 @@ function displayStats(toon) {
     $('.ten').html(`${stats[15].Value}`);
     $('.pie').html(`${stats[16].Value}`);
 
-}
+};
 
 //Grabs the level of each class
 //then displays it
@@ -333,7 +360,7 @@ function displayJobLevels(toon) {
     $('.btn').html(`${level[27]}`);
     $('.fsh').html(`${level[28]}`);
 
-}
+};
 
 function displayGear(toon) {
 
@@ -345,7 +372,7 @@ function displayGear(toon) {
     $('.glamour').html(getGlamColumns(gear, leftParts, rightParts));
     $('.ilvl').html(getItemLevel(gear));
 
-}
+};
 
 //Creates an array of the gear list
 //Then filters out the soul crystal out of the list
@@ -374,7 +401,7 @@ function getItemLevel(gear) {
     let ilvl = calculateLevel(itemLevel);
 
     return ilvl;
-}
+};
 
 //Adds every value together
 //Divided by the length of the array
@@ -392,7 +419,7 @@ function calculateLevel(itemLevel) {
     }
     let total = Math.round(sum / itemLevel.length);
     return total;
-}
+};
 
 //Checks and returns if materia is present on any of the gear pieces
 function getMateria(part) {
@@ -412,7 +439,7 @@ function getMateria(part) {
 
         `
     }
-}
+};
 
 
 //Gets and returns all currently equipped gear
@@ -440,7 +467,7 @@ function getGearItem(gear, partName) {
         `
     }
 
-}
+};
 
 //breaks up the gear into 2 columns
 function getGearColumns(gear, column1, column2) {
@@ -457,7 +484,7 @@ function getGearColumns(gear, column1, column2) {
         <ul class="bodyParts left">${leftColumn}</ul>
         <ul class="bodyParts right">${rightColumn}</ul>
     `
-}
+};
 
 function getGlamColumns(gear, column1, column2) {
 
@@ -474,7 +501,7 @@ function getGlamColumns(gear, column1, column2) {
         <ul class="bodyParts left">${leftColumn}</ul>
         <ul class="bodyParts right">${rightColumn}</ul>
     `
-}
+};
 
 
 function getGlamItem(gear, partName){
@@ -495,7 +522,7 @@ function getGlamItem(gear, partName){
         return ``;
     }
 
-}
+};
 
 function getDyeColor(glamPart){
     if(glamPart != null && glamPart != undefined) {
@@ -510,6 +537,35 @@ function getDyeColor(glamPart){
             return ""
         }
     } 
+};
+
+function displayMinions(minions) {
+    $('.minList').html(getMinions(minions));
+    console.log(minions)
+};
+
+function displayMounts(mounts) {
+    $('.mounList').html(getMounts(mounts));
+    console.log(mounts)
+};
+
+function getMinions(minions) {
+    return minions.map((minion) => {
+        return `
+        <li class="wrapper" key=${minion.Name}>
+            <img src=${minion.Icon} alt=${minion.Name} title=${minion.Name}/>
+        </li>
+        `
+    })
 }
 
+function getMounts(mounts) {
+    return mounts.map((mount) => {
+        return `
+        <li class="wrapper" key=${mount.Name}>
+            <img src=${mount.Icon} alt=${mount.Name} title=${mount.Name}/>
+        </li>
+        `
+    })
+}
 $(formWatch);

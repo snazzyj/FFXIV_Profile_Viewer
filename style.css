@@ -247,7 +247,7 @@ a:hover {
 
 /* Gear/Character Stats section */
 
-.stats, .gear, .glamour {
+.stats, .gear, .glamour, .minions, .mounts {
     width: 60%;
     color: white;
     background-color: #363647;
@@ -265,7 +265,7 @@ a:hover {
     padding-top: 10px
 }
 
-.charInfo,.activeJob,.activeLevel,.minions,.mounts {
+.charInfo,.activeJob,.activeLevel,.minionCount,.mountCount {
     display: inline-block;
 }
 
@@ -304,7 +304,7 @@ a:hover {
     float: right;
 }
 
-.mounts {
+.mountCount {
     padding-right: 10px;
 }
 
@@ -381,13 +381,10 @@ a:hover {
 
 .navBtns {
     position: absolute;
-    top: -55px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    top: -60px;
 }
 
-.gearBtn, .glamBtn, .statsBtn {
+.gearBtn, .glamBtn, .statsBtn, .minionsBtn, .mountsBtn {
     border-radius: 20px;
     background-color: #363647;
     border: none;
@@ -396,16 +393,29 @@ a:hover {
     font-size: 24px;
     opacity: 0.7;
     cursor: pointer;
-    width: 200px;
+    min-width: 125px;
     height: 50px;
+    margin: 5px 0px;
 }
 
-.gearBtn:hover, .glamBtn:hover {
+.gearBtn:hover, .glamBtn:hover, .statsBtn:hover, .minionsBtn:hover, .mountsBtn:hover {
     background-color:#363647;
     opacity: 1;
     transition: ease-in 0.1s;
 }
 
+.minList, .mounList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 10px;
+}
+
+.wrapper {
+    margin: 5px;
+    position: relative;
+}
 
 /* footer */
 
@@ -566,5 +576,3 @@ a:hover {
 .attrInt, .attrMnd {
     color: #9d45c5;
 }
-
-/* Font Styling */
