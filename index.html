@@ -89,12 +89,23 @@
     <main id="js-characterData" class="CharacterData">
 
         <div class="characterBox hidden">
-            <div class="navBtns">
-                <button class="statsBtn">Stats</button>
-                <button class="gearBtn">Gear</button>
-                <button class="glamBtn">Glam</button>
-                <button class="minionsBtn">Minions</button>
-                <button class="mountsBtn">Mounts</button>
+            <div class="navBtns" role="navigation">
+                <button class="statsBtn" role="button">Stats</button>
+                <button class="gearBtn" role="button">Gear</button>
+                <button class="glamBtn" role="button">Glam</button>
+                <button class="minionsBtn" role="button">Minions</button>
+                <button class="mountsBtn" role="button">Mounts</button>
+            </div>
+
+            <div class="dropDown" role="navigation">
+                <button class="dropDownBtn" role="button">Menu</button>
+                <div class="dropDownLinks">
+                    <button class="statsBtn" role="button">Stats</button>
+                    <button class="gearBtn" role="button">Gear</button>
+                    <button class="glamBtn" role="button">Glam</button>
+                    <button class="minionsBtn" role="button">Minions</button>
+                    <button class="mountsBtn" role="button">Mounts</button>
+                </div>
             </div>
 
             <section class="leftSideContainer">

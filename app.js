@@ -100,7 +100,6 @@ function profileWatch() {
         let dataParams = "?extended=1&data=MIMO,FC,CJ"
         let playerData = $(this).attr('href');
         let playerDataUrl = playerData + dataParams;
-        console.log({playerDataUrl})
         fetch(playerDataUrl)
             .then(response => {
                 if (response.ok) {
@@ -568,4 +567,21 @@ function getMounts(mounts) {
         `
     })
 }
+
+// Mobile Menu Toggle
+function toggleMenu() {
+    $('.dropDownBtn').on('click', function() {
+        $('.dropDownLinks').toggleClass('show')
+    })
+}
+
+function hideMenu() {
+    $(document).mouseup(function (e) {
+        if ($(e.target).closest('.dropDown').length === 0) {
+            $('.dropDownLinks').removeClass('show')
+        }
+    })
+}
+toggleMenu();
+hideMenu();
 $(formWatch);
